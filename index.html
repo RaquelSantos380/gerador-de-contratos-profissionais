@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ContratoFácil - Contratos Profissionais em 5 Minutos</title>
+    <link rel="icon" href="logo.jpg" type="image/jpeg">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
@@ -67,6 +68,13 @@
             gap: 10px;
             font-size: 1.5rem;
             font-weight: 700;
+        }
+
+        .logo-img {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            object-fit: cover;
         }
 
         .logo i {
@@ -854,6 +862,23 @@
             margin-top: 0.3rem;
         }
 
+        /* Notification Styles */
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: var(--success);
+            color: white;
+            padding: 1rem 1.5rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            z-index: 10000;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            max-width: 400px;
+        }
+
         /* Responsive */
         @media (max-width: 768px) {
             .header-content {
@@ -898,6 +923,23 @@
             .payment-options {
                 grid-template-columns: 1fr;
             }
+            
+            .notification {
+                left: 20px;
+                right: 20px;
+                max-width: none;
+            }
+        }
+
+        /* Animation Keyframes */
+        @keyframes slideIn {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        @keyframes slideOut {
+            from { transform: translateX(0); opacity: 1; }
+            to { transform: translateX(100%); opacity: 0; }
         }
     </style>
 </head>
@@ -907,7 +949,7 @@
         <div class="container">
             <div class="header-content">
                 <div class="logo">
-                    <i class="fas fa-file-contract"></i>
+                    <img src="logo.jpg" alt="ContratoFácil" class="logo-img">
                     <span>ContratoFácil</span>
                 </div>
                 <nav>
@@ -1747,6 +1789,139 @@
             // Add selected class to clicked option
             element.classList.add('selected');
         }
+
+        // Função para baixar o contrato AUTOMATICAMENTE
+        function downloadContract() {
+            try {
+                // Obter o conteúdo do contrato
+                const contractContent = generateContractContent();
+                
+                // Criar blob com o conteúdo
+                const blob = new Blob([contractContent], { 
+                    type: 'text/html;charset=utf-8' 
+                });
+                
+                // Criar link de download
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                
+                // Nome do arquivo com timestamp
+                const timestamp = new Date().getTime();
+                a.download = `contrato-profissional-${timestamp}.html`;
+                
+                // Disparar o download
+                document.body.appendChild(a);
+                a.click();
+                
+                // Limpar
+                setTimeout(() => {
+                    document.body.removeChild(a);
+                    URL.revokeObjectURL(url);
+                }, 100);
+                
+                // Feedback para o usuário
+                showDownloadSuccess();
+                
+            } catch (error) {
+                console.error('Erro no download:', error);
+                alert('❌ Erro ao baixar o contrato. Tente novamente.');
+            }
+        }
+
+        // Função para gerar o conteúdo do contrato em formato limpo
+        function generateContractContent() {
+            const contractHTML = generateProfessionalContract();
+            
+            return `<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Contrato Profissional - ContratoFácil</title>
+    <style>
+        body { 
+            font-family: 'Times New Roman', Times, serif; 
+            margin: 2.5cm; 
+            line-height: 1.6; 
+            font-size: 12px;
+            color: #000;
+        }
+        .contract-header { 
+            text-align: center; 
+            margin-bottom: 2rem; 
+            border-bottom: 2px solid #000;
+            padding-bottom: 1rem;
+        }
+        .contract-title { 
+            font-size: 16px; 
+            font-weight: bold; 
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+        }
+        .contract-clause { 
+            margin-bottom: 15px; 
+            text-align: justify;
+        }
+        .contract-clause h4 {
+            font-size: 11px;
+            margin-bottom: 8px;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+        .contract-clause p {
+            margin-bottom: 6px;
+            text-indent: 15px;
+        }
+        .contract-clause ul {
+            margin: 8px 0;
+            padding-left: 30px;
+        }
+        .contract-clause li {
+            margin-bottom: 4px;
+        }
+        .signature-line-style {
+            border-top: 1px solid #000;
+            padding-top: 5px;
+            margin-top: 40px;
+        }
+        @media print {
+            body { margin: 1.5cm; }
+        }
+    </style>
+</head>
+<body>
+    ${contractHTML}
+</body>
+</html>`;
+        }
+
+        // Função para mostrar feedback de sucesso
+        function showDownloadSuccess() {
+            // Criar notificação
+            const notification = document.createElement('div');
+            notification.className = 'notification';
+            notification.style.animation = 'slideIn 0.3s ease';
+            
+            notification.innerHTML = `
+                <i class="fas fa-check-circle"></i>
+                <div>
+                    <strong>✅ Contrato baixado com sucesso!</strong>
+                    <div style="font-size: 0.9rem; opacity: 0.9;">Verifique sua pasta de downloads</div>
+                </div>
+            `;
+            
+            document.body.appendChild(notification);
+            
+            // Remover após 5 segundos
+            setTimeout(() => {
+                notification.style.animation = 'slideOut 0.3s ease';
+                setTimeout(() => {
+                    if (document.body.contains(notification)) {
+                        document.body.removeChild(notification);
+                    }
+                }, 300);
+            }, 5000);
+        }
         
         function processPayment() {
             // Verificar se uma forma de pagamento foi selecionada
@@ -1781,88 +1956,6 @@
                 alert('🎉 Pagamento aprovado! Contrato baixado com sucesso!');
                 closePaymentModal();
             }, 2000);
-        }
-        
-        // Função para baixar o contrato
-        function downloadContract() {
-            try {
-                // Obter o conteúdo HTML do contrato
-                const contractContent = document.getElementById('contractPreview').innerHTML;
-                
-                // Criar um documento mais limpo para impressão
-                const cleanContract = `
-                    <!DOCTYPE html>
-                    <html>
-                    <head>
-                        <title>Contrato Profissional - ContratoFácil</title>
-                        <meta charset="UTF-8">
-                        <style>
-                            body { 
-                                font-family: 'Times New Roman', Times, serif; 
-                                margin: 2cm; 
-                                line-height: 1.6; 
-                                font-size: 12px;
-                                color: #000;
-                            }
-                            .contract-header { 
-                                text-align: center; 
-                                margin-bottom: 2rem; 
-                                border-bottom: 2px solid #000;
-                                padding-bottom: 1rem;
-                            }
-                            .contract-title { 
-                                font-size: 16px; 
-                                font-weight: bold; 
-                                margin-bottom: 0.5rem;
-                                text-transform: uppercase;
-                            }
-                            .contract-clause { 
-                                margin-bottom: 15px; 
-                                text-align: justify;
-                            }
-                            .contract-clause h4 {
-                                font-size: 11px;
-                                margin-bottom: 8px;
-                                font-weight: bold;
-                                text-transform: uppercase;
-                            }
-                            .contract-clause p {
-                                margin-bottom: 6px;
-                                text-indent: 15px;
-                            }
-                            .signature-line-style {
-                                border-top: 1px solid #000;
-                                padding-top: 5px;
-                                margin-top: 40px;
-                            }
-                            @media print {
-                                body { margin: 1cm; }
-                            }
-                        </style>
-                    </head>
-                    <body>
-                        ${contractContent}
-                    </body>
-                    </html>
-                `;
-                
-                // Abrir em nova janela para impressão
-                const printWindow = window.open('', '_blank');
-                printWindow.document.write(cleanContract);
-                printWindow.document.close();
-                
-                // Focar na nova janela e aguardar carregamento
-                setTimeout(() => {
-                    printWindow.focus();
-                    if (confirm('Contrato gerado com sucesso! Deseja imprimir ou salvar como PDF?')) {
-                        printWindow.print();
-                    }
-                }, 500);
-                
-            } catch (error) {
-                console.error('Erro ao gerar contrato:', error);
-                alert('❌ Erro ao gerar o contrato. Por favor, tente novamente.');
-            }
         }
         
         // Initialize the preview with current date
