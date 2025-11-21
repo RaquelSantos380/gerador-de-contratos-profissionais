@@ -1,0 +1,1797 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ContratoFácil - Contratos Profissionais em 5 Minutos</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary: #2c5aa0;
+            --primary-dark: #1e3d6f;
+            --secondary: #ff6b00;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --success: #28a745;
+            --danger: #dc3545;
+            --warning: #ffc107;
+            --gray: #6c757d;
+            --border-radius: 10px;
+            --shadow: 0 5px 15px rgba(0,0,0,0.1);
+            --transition: all 0.3s ease;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            padding: 1rem 0;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .logo i {
+            font-size: 1.8rem;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+            padding: 0.5rem 1rem;
+            border-radius: var(--border-radius);
+        }
+
+        nav a:hover {
+            background-color: rgba(255,255,255,0.1);
+        }
+
+        .btn {
+            display: inline-block;
+            background: var(--secondary);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: var(--border-radius);
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            text-decoration: none;
+            text-align: center;
+        }
+
+        .btn:hover {
+            background: #e55a00;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255,107,0,0.3);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid white;
+            color: white;
+        }
+
+        .btn-outline:hover {
+            background: white;
+            color: var(--primary);
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 5rem 0;
+            text-align: center;
+            background: linear-gradient(rgba(44, 90, 160, 0.9), rgba(44, 90, 160, 0.9)), url('hero-background.jpg');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            border-radius: 0 0 var(--border-radius) var(--border-radius);
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            max-width: 700px;
+            margin: 0 auto 2rem;
+            opacity: 0.9;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 2rem;
+        }
+
+        /* Stats Section */
+        .stats {
+            padding: 3rem 0;
+            background: white;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            text-align: center;
+        }
+
+        .stat-card {
+            padding: 1.5rem;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            color: var(--gray);
+            font-weight: 500;
+        }
+
+        /* Features */
+        .features {
+            padding: 5rem 0;
+            background: var(--light);
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .section-title p {
+            font-size: 1.2rem;
+            color: var(--gray);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-card {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            text-align: center;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+        }
+
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+
+        /* Generator Section */
+        .generator {
+            padding: 5rem 0;
+            background: white;
+        }
+
+        .generator-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: start;
+        }
+
+        @media (max-width: 968px) {
+            .generator-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .form-section {
+            background: var(--light);
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            box-shadow: var(--shadow);
+        }
+
+        .form-section h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary);
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--light);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--dark);
+        }
+
+        .form-group input, .form-group select, .form-group textarea {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            border: 2px solid #e0e0e0;
+            border-radius: var(--border-radius);
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+            border-color: var(--primary);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(44, 90, 160, 0.1);
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .preview-section {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 100px;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        .preview-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .preview-header h3 {
+            font-size: 1.8rem;
+            color: var(--primary);
+        }
+
+        /* CONTRATO PROFISSIONAL - ESTILOS ESPECÍFICOS */
+        .contract-preview {
+            background: white;
+            border: 2px solid #e0e0e0;
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            font-family: 'Times New Roman', Times, serif;
+            line-height: 1.6;
+            font-size: 12px;
+        }
+
+        .contract-header {
+            text-align: center;
+            margin-bottom: 2rem;
+            border-bottom: 2px solid #e0e0e0;
+            padding-bottom: 1rem;
+        }
+
+        .contract-title {
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+        }
+
+        .contract-body {
+            font-size: 11px;
+            text-align: justify;
+        }
+
+        .contract-clause {
+            margin-bottom: 15px;
+        }
+
+        .contract-clause h4 {
+            font-size: 11px;
+            margin-bottom: 8px;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        .contract-clause p {
+            margin-bottom: 6px;
+            text-indent: 15px;
+        }
+
+        .contract-clause ul {
+            margin: 8px 0;
+            padding-left: 30px;
+        }
+
+        .contract-clause li {
+            margin-bottom: 4px;
+        }
+
+        .signature-area {
+            margin-top: 40px;
+        }
+
+        .signature-line {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 50px;
+        }
+
+        .signature-box {
+            width: 45%;
+            text-align: center;
+        }
+
+        .signature-line-style {
+            border-top: 1px solid #000;
+            padding-top: 5px;
+            margin-top: 40px;
+        }
+
+        .variable {
+            background-color: #ffffcc;
+            padding: 1px 4px;
+            border-radius: 2px;
+            font-weight: bold;
+        }
+
+        .actions {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .btn-success {
+            background: var(--success);
+        }
+
+        .btn-success:hover {
+            background: #218838;
+        }
+
+        .btn-secondary {
+            background: var(--gray);
+        }
+
+        .btn-secondary:hover {
+            background: #5a6268;
+        }
+
+        /* Pricing */
+        .pricing {
+            padding: 5rem 0;
+            background: var(--light);
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .pricing-card {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 2.5rem 2rem;
+            text-align: center;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            border: 2px solid #e0e0e0;
+            position: relative;
+        }
+
+        .pricing-card.featured {
+            border-color: var(--secondary);
+            transform: scale(1.05);
+            border-width: 3px;
+        }
+
+        .pricing-card.featured::before {
+            content: "MAIS POPULAR";
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--secondary);
+            color: white;
+            padding: 0.3rem 1.5rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .pricing-card.featured:hover {
+            transform: scale(1.05) translateY(-10px);
+        }
+
+        .pricing-header {
+            margin-bottom: 2rem;
+        }
+
+        .pricing-name {
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .pricing-price {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: var(--dark);
+        }
+
+        .pricing-period {
+            font-size: 1rem;
+            color: var(--gray);
+            margin-bottom: 0.5rem;
+        }
+
+        .pricing-description {
+            font-size: 0.9rem;
+            color: var(--gray);
+            margin-bottom: 1rem;
+        }
+
+        .pricing-features {
+            list-style: none;
+            margin: 2rem 0;
+            text-align: left;
+        }
+
+        .pricing-features li {
+            padding: 0.7rem 0;
+            border-bottom: 1px solid #f0f0f0;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .pricing-features li i {
+            color: var(--success);
+        }
+
+        .pricing-avulsa {
+            text-align: center;
+            margin-top: 3rem;
+            padding: 2rem;
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+        }
+
+.testimonial-text {
+    font-style: italic;
+    margin-bottom: 1.5rem;
+    position: relative;
+}
+
+.testimonial-text::before {
+    content: """;
+    font-size: 4rem;
+    color: var(--primary);
+    opacity: 0.2;
+    position: absolute;
+    top: -1rem;
+    left: -0.5rem;
+}
+
+.testimonials {
+    padding: 5rem 0;
+    background: white;
+}
+
+.testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.testimonial-card {
+    background: var(--light);
+    border-radius: var(--border-radius);
+    padding: 2rem;
+    box-shadow: var(--shadow);
+    transition: var(--transition);
+}
+
+.testimonial-card:hover {
+    transform: translateY(-5px);
+}
+
+.testimonial-author {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}        .author-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 3px solid var(--primary);
+        }
+
+        .author-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .author-info h4 {
+            margin-bottom: 0.2rem;
+            color: var(--primary);
+        }
+
+        .author-info p {
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+
+        /* FAQ */
+        .faq {
+            padding: 5rem 0;
+            background: var(--light);
+        }
+
+        .faq-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            margin-bottom: 1rem;
+            border: 1px solid #e0e0e0;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            background: white;
+        }
+
+        .faq-question {
+            padding: 1.5rem;
+            background: var(--light);
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: var(--transition);
+        }
+
+        .faq-question:hover {
+            background: #e9ecef;
+        }
+
+        .faq-answer {
+            padding: 0 1.5rem;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+
+        .faq-item.active .faq-answer {
+            padding: 1.5rem;
+            max-height: 500px;
+        }
+
+        /* Tips Section */
+        .tips {
+            padding: 5rem 0;
+            background: white;
+        }
+
+        .tips-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .tip-card {
+            background: var(--light);
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            text-align: center;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .tip-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .tip-icon {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .tip-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 4rem 0 2rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-column h4 {
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+            color: white;
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-column a {
+            color: #adb5bd;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-column a:hover {
+            color: white;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            transition: var(--transition);
+        }
+
+        .social-links a:hover {
+            background: var(--primary);
+            transform: translateY(-3px);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: #adb5bd;
+        }
+
+        /* Payment Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: var(--border-radius);
+            width: 90%;
+            max-width: 500px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            overflow: hidden;
+            animation: modalAppear 0.3s ease;
+        }
+
+        @keyframes modalAppear {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .modal-header {
+            padding: 1.5rem;
+            background: var(--primary);
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-header h3 {
+            font-size: 1.5rem;
+        }
+
+        .close-modal {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        .modal-body {
+            padding: 2rem;
+        }
+
+        .payment-options {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .payment-option {
+            border: 2px solid #e0e0e0;
+            border-radius: var(--border-radius);
+            padding: 1rem;
+            text-align: center;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .payment-option:hover {
+            border-color: var(--primary);
+        }
+
+        .payment-option.selected {
+            border-color: var(--primary);
+            background: rgba(44, 90, 160, 0.05);
+        }
+
+        .payment-icon {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+            color: var(--primary);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            nav ul {
+                gap: 1rem;
+            }
+            
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            
+            .hero p {
+                font-size: 1.1rem;
+            }
+            
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+            
+            .pricing-card.featured {
+                transform: none;
+            }
+            
+            .signature-line {
+                flex-direction: column;
+                gap: 2rem;
+            }
+            
+            .signature-box {
+                width: 100%;
+            }
+            
+            .payment-options {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-file-contract"></i>
+                    <span>ContratoFácil</span>
+                </div>
+                <nav>
+                    <ul>
+                        <li><a href="#home">Início</a></li>
+                        <li><a href="#features">Recursos</a></li>
+                        <li><a href="#generator">Criar Contrato</a></li>
+                        <li><a href="#pricing">Planos</a></li>
+                        <li><a href="#testimonials">Depoimentos</a></li>
+                        <li><a href="#faq">FAQ</a></li>
+                    </ul>
+                </nav>
+                <a href="#generator" class="btn btn-outline">Criar Contrato Agora</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <h1>Contratos Profissionais em 5 Minutos</h1>
+            <p>Crie contratos de prestação de serviços personalizados, seguros e juridicamente válidos. Economize tempo e evite dores de cabeça.</p>
+            <div class="hero-buttons">
+                <a href="#generator" class="btn">Criar Meu Contrato</a>
+                <a href="#pricing" class="btn btn-outline">Ver Planos</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number">+5.000</div>
+                    <div class="stat-label">Contratos Gerados</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">+2.000</div>
+                    <div class="stat-label">Clientes Satisfeitos</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">98%</div>
+                    <div class="stat-label">Taxa de Aprovação</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">24/7</div>
+                    <div class="stat-label">Suporte Disponível</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <div class="container">
+            <div class="section-title">
+                <h2>Por que escolher o ContratoFácil?</h2>
+                <p>Oferecemos a solução mais completa para criação de contratos profissionais</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <h3>Rápido e Fácil</h3>
+                    <p>Crie contratos profissionais em apenas 5 minutos com nosso formulário intuitivo.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>Juridicamente Válido</h3>
+                    <p>Modelos criados por especialistas jurídicos e atualizados conforme a legislação.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-edit"></i>
+                    </div>
+                    <h3>Totalmente Personalizável</h3>
+                    <p>Adapte cada cláusula do contrato às suas necessidades específicas.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-file-download"></i>
+                    </div>
+                    <h3>Download Imediato</h3>
+                    <p>Receba seu contrato em PDF e Word prontos para usar assim que finalizar.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <h3>100% Online</h3>
+                    <p>Acesse de qualquer dispositivo, não precisa instalar software.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-headset"></i>
+                    </div>
+                    <h3>Suporte Especializado</h3>
+                    <p>Nossa equipe está pronta para ajudar com qualquer dúvida sobre seu contrato.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Generator Section -->
+    <section class="generator" id="generator">
+        <div class="container">
+            <div class="section-title">
+                <h2>Crie Seu Contrato Agora</h2>
+                <p>Preencha os dados abaixo e visualize em tempo real seu contrato profissional</p>
+            </div>
+            <div class="generator-container">
+                <!-- Form Section -->
+                <div class="form-section">
+                    <h3>Informações do Contrato</h3>
+                    <div class="form-group">
+                        <label for="contractType">Tipo de Contrato</label>
+                        <select id="contractType">
+                            <option value="prestacao-servicos">Prestação de Serviços</option>
+                            <option value="parceria-comercial">Parceria Comercial</option>
+                            <option value="confidencialidade">Acordo de Confidencialidade (NDA)</option>
+                            <option value="trabalho-autonomo">Trabalho Autônomo</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="contractorName">Nome do Contratante</label>
+                            <input type="text" id="contractorName" placeholder="Seu nome ou empresa">
+                        </div>
+                        <div class="form-group">
+                            <label for="contractorDoc">CPF/CNPJ do Contratante</label>
+                            <input type="text" id="contractorDoc" placeholder="CPF ou CNPJ">
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="contractorAddress">Endereço do Contratante</label>
+                            <input type="text" id="contractorAddress" placeholder="Endereço completo">
+                        </div>
+                        <div class="form-group">
+                            <label for="contractorProfession">Profissão do Contratante</label>
+                            <input type="text" id="contractorProfession" placeholder="Sua profissão">
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="contractedName">Nome do Contratado</label>
+                            <input type="text" id="contractedName" placeholder="Nome do prestador">
+                        </div>
+                        <div class="form-group">
+                            <label for="contractedDoc">CPF/CNPJ do Contratado</label>
+                            <input type="text" id="contractedDoc" placeholder="CPF ou CNPJ">
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="contractedAddress">Endereço do Contratado</label>
+                            <input type="text" id="contractedAddress" placeholder="Endereço completo">
+                        </div>
+                        <div class="form-group">
+                            <label for="contractedProfession">Profissão do Contratado</label>
+                            <input type="text" id="contractedProfession" placeholder="Profissão do prestador">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="serviceDescription">Descrição do Serviço</label>
+                        <textarea id="serviceDescription" rows="3" placeholder="Descreva detalhadamente o serviço a ser prestado"></textarea>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="serviceValue">Valor do Serviço (R$)</label>
+                            <input type="text" id="serviceValue" placeholder="0,00">
+                        </div>
+                        <div class="form-group">
+                            <label for="paymentMethod">Forma de Pagamento</label>
+                            <select id="paymentMethod">
+                                <option value="transferencia">Transferência Bancária</option>
+                                <option value="boleto">Boleto</option>
+                                <option value="pix">PIX</option>
+                                <option value="cartao">Cartão de Crédito</option>
+                                <option value="dinheiro">Dinheiro</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="startDate">Data de Início</label>
+                            <input type="date" id="startDate">
+                        </div>
+                        <div class="form-group">
+                            <label for="endDate">Data de Término</label>
+                            <input type="date" id="endDate">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="contractCity">Cidade de Vigência</label>
+                        <input type="text" id="contractCity" placeholder="Cidade onde o contrato é válido">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="confidentialityPeriod">Período de Confidencialidade (anos)</label>
+                        <input type="number" id="confidentialityPeriod" value="2" min="1" max="10">
+                    </div>
+                    
+                    <div class="actions">
+                        <button class="btn" onclick="updatePreview()">
+                            <i class="fas fa-eye"></i> Atualizar Visualização
+                        </button>
+                        <button class="btn btn-success" onclick="openPaymentModal('avulsa')">
+                            <i class="fas fa-shopping-cart"></i> Comprar Avulso - R$ 9,99
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Preview Section -->
+                <div class="preview-section">
+                    <div class="preview-header">
+                        <h3>Pré-visualização</h3>
+                    </div>
+                    <div class="contract-preview" id="contractPreview">
+                        <!-- CONTRATO PROFISSIONAL SERÁ INSERIDO AQUI VIA JAVASCRIPT -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section class="pricing" id="pricing">
+        <div class="container">
+            <div class="section-title">
+                <h2>Planos e Preços</h2>
+                <p>Escolha o plano ideal para suas necessidades</p>
+            </div>
+            <div class="pricing-grid">
+                <div class="pricing-card">
+                    <div class="pricing-header">
+                        <div class="pricing-name">Básico</div>
+                        <div class="pricing-price">R$ 14,90</div>
+                        <div class="pricing-period">por mês</div>
+                        <div class="pricing-description">3 contratos mensais</div>
+                    </div>
+                    <ul class="pricing-features">
+                        <li><i class="fas fa-check"></i> 3 contratos por mês</li>
+                        <li><i class="fas fa-check"></i> Download em PDF</li>
+                        <li><i class="fas fa-check"></i> Modelos básicos</li>
+                        <li><i class="fas fa-check"></i> Suporte por email</li>
+                        <li><i class="fas fa-times"></i> Download em Word</li>
+                        <li><i class="fas fa-times"></i> Revisão jurídica</li>
+                    </ul>
+                    <button class="btn" onclick="openPaymentModal('basico')">Escolher Plano</button>
+                </div>
+                
+                <div class="pricing-card featured">
+                    <div class="pricing-header">
+                        <div class="pricing-name">Intermediário</div>
+                        <div class="pricing-price">R$ 29,90</div>
+                        <div class="pricing-period">por mês</div>
+                        <div class="pricing-description">10-20 contratos mensais</div>
+                    </div>
+                    <ul class="pricing-features">
+                        <li><i class="fas fa-check"></i> 10-20 contratos por mês</li>
+                        <li><i class="fas fa-check"></i> Download em PDF + Word</li>
+                        <li><i class="fas fa-check"></i> Todos os modelos</li>
+                        <li><i class="fas fa-check"></i> Revisão jurídica básica</li>
+                        <li><i class="fas fa-check"></i> Suporte prioritário</li>
+                        <li><i class="fas fa-check"></i> Armazenamento em nuvem</li>
+                    </ul>
+                    <button class="btn btn-success" onclick="openPaymentModal('intermediario')">Escolher Plano</button>
+                </div>
+                
+                <div class="pricing-card">
+                    <div class="pricing-header">
+                        <div class="pricing-name">Ilimitado</div>
+                        <div class="pricing-price">R$ 49,90</div>
+                        <div class="pricing-period">por mês</div>
+                        <div class="pricing-description">Contratos ilimitados</div>
+                    </div>
+                    <ul class="pricing-features">
+                        <li><i class="fas fa-check"></i> Contratos ilimitados</li>
+                        <li><i class="fas fa-check"></i> Download em PDF + Word</li>
+                        <li><i class="fas fa-check"></i> Todos os modelos premium</li>
+                        <li><i class="fas fa-check"></i> Revisão jurídica completa</li>
+                        <li><i class="fas fa-check"></i> Suporte 24/7</li>
+                        <li><i class="fas fa-check"></i> Consultoria mensal</li>
+                    </ul>
+                    <button class="btn" onclick="openPaymentModal('ilimitado')">Escolher Plano</button>
+                </div>
+            </div>
+
+            <div class="pricing-avulsa">
+                <h3>Não precisa de assinatura?</h3>
+                <p style="margin-bottom: 1rem;">Compre contratos avulsos quando precisar</p>
+                <div style="font-size: 2rem; font-weight: bold; color: var(--primary); margin-bottom: 1rem;">
+                    R$ 9,90 por contrato
+                </div>
+                <button class="btn btn-success" onclick="openPaymentModal('avulsa')">
+                    <i class="fas fa-shopping-cart"></i> Comprar Contrato Avulso
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tips Section -->
+    <section class="tips">
+        <div class="container">
+            <div class="section-title">
+                <h2>Dicas para um Contrato Perfeito</h2>
+                <p>Aprenda a criar contratos que protegem seu negócio</p>
+            </div>
+            <div class="tips-grid">
+                <div class="tip-card">
+                    <div class="tip-icon">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <h3>Revise Sempre</h3>
+                    <p>Leia cuidadosamente todas as cláusulas antes de assinar qualquer contrato.</p>
+                </div>
+                <div class="tip-card">
+                    <div class="tip-icon">
+                        <i class="fas fa-edit"></i>
+                    </div>
+                    <h3>Personalize</h3>
+                    <p>Adapte o contrato à realidade do seu negócio e às necessidades específicas.</p>
+                </div>
+                <div class="tip-card">
+                    <div class="tip-icon">
+                        <i class="fas fa-file-signature"></i>
+                    </div>
+                    <h3>Assine Corretamente</h3>
+                    <p>Certifique-se de que todas as partes assinem o contrato de forma válida.</p>
+                </div>
+                <div class="tip-card">
+                    <div class="tip-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>Proteja-se</h3>
+                    <p>Inclua cláusulas de confidencialidade e propriedade intelectual quando necessário.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials" id="testimonials">
+        <div class="container">
+            <div class="section-title">
+                <h2>O que nossos clientes dizem</h2>
+                <p>Mais de 2.000 profissionais já criaram contratos conosco</p>
+            </div>
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="testimonial-text">
+                        "Como freelancer, sempre tive dificuldade com contratos. O ContratoFácil resolveu meu problema de forma rápida e profissional. Recomendo!"
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">
+                            <img src="pessoa1.jpg" alt="Maria Silva">
+                        </div>
+                        <div class="author-info">
+                            <h4>Maria Silva</h4>
+                            <p>Designer Freelancer</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <div class="testimonial-text">
+                        "Precisava de um contrato urgente para um novo cliente e o ContratoFácil me salvou. Em 10 minutos tinha um documento profissional pronto."
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">
+                            <img src="pessoa2.jpg" alt="Pedro Santos">
+                        </div>
+                        <div class="author-info">
+                            <h4>Pedro Santos</h4>
+                            <p>Desenvolvedor Web</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <div class="testimonial-text">
+                        "A equipe revisou meu contrato e fez ajustes importantes que eu não tinha percebido. Serviço de alta qualidade!"
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">
+                            <img src="pessoa3.jpg" alt="Ana Costa">
+                        </div>
+                        <div class="author-info">
+                            <h4>Júlio Costa</h4>
+                            <p>Consultor de Marketing</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq" id="faq">
+        <div class="container">
+            <div class="section-title">
+                <h2>Perguntas Frequentes</h2>
+                <p>Tire suas dúvidas sobre nossos serviços</p>
+            </div>
+            <div class="faq-container">
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        Os contratos são juridicamente válidos?
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Sim, todos os nossos modelos são criados por especialistas jurídicos e estão em conformidade com a legislação brasileira. No entanto, para casos específicos ou de alto valor, recomendamos consultar um advogado.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        Como faço para baixar meu contrato?
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Após o pagamento, você receberá um link para download imediato do contrato nos formatos PDF e Word (dependendo do plano escolhido). O arquivo estará pronto para uso.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        Posso editar o contrato após o download?
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Sim, se você escolher um plano que inclui o formato Word, poderá editar o contrato livremente. O PDF também é editável com ferramentas apropriadas.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        Quais formas de pagamento são aceitas?
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Aceitamos cartão de crédito, débito, PIX e boleto bancário. O processamento é feito de forma segura através do Mercado Pago.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        Posso cancelar minha assinatura a qualquer momento?
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Sim, todas as assinaturas podem ser canceladas a qualquer momento sem multa. Você continua com acesso até o final do período contratado.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h4>ContratoFácil</h4>
+                    <p>Criação de contratos profissionais de forma rápida, segura e acessível.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h4>Links Rápidos</h4>
+                    <ul>
+                        <li><a href="#home">Início</a></li>
+                        <li><a href="#features">Recursos</a></li>
+                        <li><a href="#generator">Criar Contrato</a></li>
+                        <li><a href="#pricing">Planos</a></li>
+                        <li><a href="#faq">FAQ</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h4>Modelos de Contrato</h4>
+                    <ul>
+                        <li><a href="#">Prestação de Serviços</a></li>
+                        <li><a href="#">Parceria Comercial</a></li>
+                        <li><a href="#">Confidencialidade (NDA)</a></li>
+                        <li><a href="#">Trabalho Autônomo</a></li>
+                        <li><a href="#">Locação de Imóvel</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h4>Contato</h4>
+                    <ul>
+                        <li><i class="fas fa-envelope"></i> contato@contratofacil.com</li>
+                        <li><i class="fas fa-phone"></i> (11) 9999-9999</li>
+                        <li><i class="fas fa-map-marker-alt"></i> São Paulo, SP</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2024 ContratoFácil. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Payment Modal -->
+    <div class="modal" id="paymentModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modalTitle">Finalizar Compra</h3>
+                <button class="close-modal" onclick="closePaymentModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <h4 id="modalDescription">Resumo do Pedido</h4>
+                <p id="modalPlanDescription"></p>
+                <p><strong id="modalPrice">Total: R$ 9,90</strong></p>
+                
+                <h4 style="margin-top: 1.5rem;">Forma de Pagamento</h4>
+                <div class="payment-options">
+                    <div class="payment-option" onclick="selectPayment(this)">
+                        <div class="payment-icon">
+                            <i class="fab fa-cc-visa"></i>
+                        </div>
+                        <div>Cartão de Crédito</div>
+                    </div>
+                    <div class="payment-option" onclick="selectPayment(this)">
+                        <div class="payment-icon">
+                            <i class="fas fa-barcode"></i>
+                        </div>
+                        <div>Boleto Bancário</div>
+                    </div>
+                    <div class="payment-option" onclick="selectPayment(this)">
+                        <div class="payment-icon">
+                            <i class="fas fa-mobile-alt"></i>
+                        </div>
+                        <div>PIX</div>
+                    </div>
+                    <div class="payment-option" onclick="selectPayment(this)">
+                        <div class="payment-icon">
+                            <i class="fab fa-cc-paypal"></i>
+                        </div>
+                        <div>PayPal</div>
+                    </div>
+                </div>
+                
+                <button class="btn btn-success" style="width: 100%; margin-top: 1.5rem;" onclick="processPayment()">
+                    <i class="fas fa-lock"></i> Finalizar Pagamento
+                </button>
+                
+                <p style="text-align: center; margin-top: 1rem; font-size: 0.8rem; color: var(--gray);">
+                    Pagamento 100% seguro processado pelo Mercado Pago
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Variáveis globais
+        let selectedPlan = 'avulsa';
+
+        // Função para gerar o contrato profissional
+        function generateProfessionalContract() {
+            // Obter valores do formulário
+            const contractorName = document.getElementById('contractorName').value || '[NOME DO CONTRATANTE]';
+            const contractorDoc = document.getElementById('contractorDoc').value || '[CPF/CNPJ]';
+            const contractorAddress = document.getElementById('contractorAddress').value || '[ENDEREÇO]';
+            const contractorProfession = document.getElementById('contractorProfession').value || '[PROFISSÃO]';
+            
+            const contractedName = document.getElementById('contractedName').value || '[NOME DO CONTRATADO]';
+            const contractedDoc = document.getElementById('contractedDoc').value || '[CPF/CNPJ]';
+            const contractedAddress = document.getElementById('contractedAddress').value || '[ENDEREÇO]';
+            const contractedProfession = document.getElementById('contractedProfession').value || '[PROFISSÃO]';
+            
+            const serviceDescription = document.getElementById('serviceDescription').value || '[DESCRIÇÃO DO SERVIÇO]';
+            const serviceValue = document.getElementById('serviceValue').value || '0,00';
+            const paymentMethod = document.getElementById('paymentMethod').value;
+            const startDate = document.getElementById('startDate').value;
+            const endDate = document.getElementById('endDate').value;
+            const contractCity = document.getElementById('contractCity').value || '[CIDADE]';
+            const confidentialityPeriod = document.getElementById('confidentialityPeriod').value || '2';
+            
+            // Formatar datas
+            const formatDate = (dateString) => {
+                if (!dateString) return '[DATA]';
+                const date = new Date(dateString);
+                return date.toLocaleDateString('pt-BR');
+            };
+            
+            // Formatar método de pagamento
+            let paymentMethodText = '';
+            switch(paymentMethod) {
+                case 'transferencia': paymentMethodText = 'transferência bancária'; break;
+                case 'boleto': paymentMethodText = 'boleto bancário'; break;
+                case 'pix': paymentMethodText = 'PIX'; break;
+                case 'cartao': paymentMethodText = 'cartão de crédito'; break;
+                case 'dinheiro': paymentMethodText = 'dinheiro'; break;
+                default: paymentMethodText = '[FORMA DE PAGAMENTO]';
+            }
+            
+            // Gerar número do contrato
+            const contractNumber = Math.floor(1000 + Math.random() * 9000);
+            const currentYear = new Date().getFullYear();
+            
+            // Construir o contrato profissional
+            const contractHTML = `
+                <div class="contract-header">
+                    <div class="contract-title">CONTRATO DE PRESTAÇÃO DE SERVIÇOS PROFISSIONAIS</div>
+                    <div>Nº ${contractNumber}/${currentYear}</div>
+                </div>
+                
+                <div class="contract-body">
+                    <!-- CLÁUSULA 1ª - DAS PARTES -->
+                    <div class="contract-clause">
+                        <h4>CLÁUSULA PRIMEIRA - DAS PARTES CONTRATANTES</h4>
+                        <p><strong>CONTRATANTE:</strong> ${contractorName}, brasileiro(a), portador(a) do ${contractorDoc}, ${contractorProfession}, residente e domiciliado(a) na ${contractorAddress};</p>
+                        <p><strong>CONTRATADO:</strong> ${contractedName}, brasileiro(a), portador(a) do ${contractedDoc}, ${contractedProfession}, residente e domiciliado(a) na ${contractedAddress}.</p>
+                    </div>
+
+                    <!-- CLÁUSULA 2ª - DO OBJETO -->
+                    <div class="contract-clause">
+                        <h4>CLÁUSULA SEGUNDA - DO OBJETO</h4>
+                        <p>Este contrato tem por objeto a prestação dos seguintes serviços por parte do CONTRATADO ao CONTRATANTE:</p>
+                        <p>${serviceDescription}.</p>
+                    </div>
+
+                    <!-- CLÁUSULA 3ª - DO PRAZO -->
+                    <div class="contract-clause">
+                        <h4>CLÁUSULA TERCEIRA - DO PRAZO DE VIGÊNCIA</h4>
+                        <p>O presente contrato terá vigência a partir de ${formatDate(startDate)} e será encerrado em ${formatDate(endDate)}, podendo ser renovado mediante acordo entre as partes.</p>
+                    </div>
+
+                    <!-- CLÁUSULA 4ª - DO VALOR E FORMA DE PAGAMENTO -->
+                    <div class="contract-clause">
+                        <h4>CLÁUSULA QUARTA - DO VALOR E FORMA DE PAGAMENTO</h4>
+                        <p>Pelo objeto deste contrato, o CONTRATANTE pagará ao CONTRATADO o valor total de R$ ${serviceValue}, na seguinte forma: ${paymentMethodText}.</p>
+                    </div>
+
+                    <!-- CLÁUSULA 5ª - DAS OBRIGAÇÕES DO CONTRATADO -->
+                    <div class="contract-clause">
+                        <h4>CLÁUSULA QUINTA - DAS OBRIGAÇÕES DO CONTRATADO</h4>
+                        <p>São obrigações do CONTRATADO:</p>
+                        <ul>
+                            <li>Executar os serviços com zelo, diligência e capacidade técnica adequada;</li>
+                            <li>Cumprir os prazos estabelecidos neste contrato;</li>
+                            <li>Fornecer todos os materiais e equipamentos necessários para a execução dos serviços;</li>
+                            <li>Emitir nota fiscal ou recibo correspondente aos valores recebidos;</li>
+                            <li>Comunicar imediatamente qualquer impedimento para o cumprimento dos prazos;</li>
+                            <li>Manter sigilo sobre todas as informações confidenciais a que tiver acesso.</li>
+                        </ul>
+                    </div>
+
+                    <!-- CLÁUSULA 6ª - DAS OBRIGAÇÕES DO CONTRATANTE -->
+                    <div class="contract-clause">
+                        <h4>CLÁUSULA SEXTA - DAS OBRIGAÇÕES DO CONTRATANTE</h4>
+                        <p>São obrigações do CONTRATANTE:</p>
+                        <ul>
+                            <li>Fornecer todas as informações necessárias para a execução dos serviços;</li>
+                            <li>Efetuar os pagamentos nos prazos e condições estabelecidos;</li>
+                            <li>Fornecer feedback e aprovações dentro do prazo estabelecido;</li>
+                            <li>Comunicar eventuais inconformidades no prazo máximo de 7 dias após a entrega.</li>
+                        </ul>
+                    </div>
+
+                    <!-- CLÁUSULA 7ª - DA CONFIDENCIALIDADE -->
+                    <div class="contract-clause">
+                        <h4>CLÁUSULA SÉTIMA - DA CONFIDENCIALIDADE</h4>
+                        <p>As partes se obrigam a manter sigilo sobre todas as informações confidenciais a que tiverem acesso em razão deste contrato, inclusive após seu término, pelo prazo de ${confidentialityPeriod} anos.</p>
+                    </div>
+
+                    <!-- CLÁUSULA 8ª - DA PROPRIEDADE INTELECTUAL -->
+                    <div class="contract-clause">
+                        <h4>CLÁUSULA OITAVA - DA PROPRIEDADE INTELECTUAL</h4>
+                        <p>Todo e qualquer direito de propriedade intelectual relativo aos serviços prestados será de propriedade do CONTRATANTE, após o pagamento integral.</p>
+                    </div>
+
+                    <!-- CLÁUSULA 9ª - DAS GARANTIAS -->
+                    <div class="contract-clause">
+                        <h4>CLÁUSULA NONA - DAS GARANTIAS</h4>
+                        <p>O CONTRATADO garante a qualidade dos serviços prestados e se obriga a reparar, sem custo adicional, quaisquer vícios ou defeitos apontados pelo CONTRATANTE no prazo de 30 dias a partir da entrega.</p>
+                    </div>
+
+                    <!-- CLÁUSULA 10ª - DA RESCISÃO -->
+                    <div class="contract-clause">
+                        <h4>CLÁUSULA DÉCIMA - DA RESCISÃO CONTRATUAL</h4>
+                        <p>Este contrato poderá ser rescindido nas seguintes hipóteses:</p>
+                        <ul>
+                            <li>Por mútuo acordo entre as partes;</li>
+                            <li>Por inadimplemento de qualquer das obrigações assumidas;</li>
+                            <li>Por força maior ou caso fortuito que impeça a execução do contrato.</li>
+                        </ul>
+                    </div>
+
+                    <!-- CLÁUSULA 11ª - DAS MULTAS -->
+                    <div class="contract-clause">
+                        <h4>CLÁUSULA DÉCIMA PRIMEIRA - DAS MULTAS</h4>
+                        <p>Em caso de descumprimento dos prazos estabelecidos, o CONTRATADO pagará multa moratória de 2% sobre o valor do serviço por dia de atraso, limitada a 20% do valor total.</p>
+                    </div>
+
+                    <!-- CLÁUSULA 12ª - DO FORO -->
+                    <div class="contract-clause">
+                        <h4>CLÁUSULA DÉCIMA SEGUNDA - DO FORO</h4>
+                        <p>Para dirimir quaisquer controvérsias oriundas deste contrato, as partes elegem o foro da comarca de ${contractCity}, com expressa renúncia a qualquer outro.</p>
+                    </div>
+
+                    <div class="signature-area">
+                        <p>E por estarem assim justos e contratados, firmam o presente instrumento em duas vias de igual teor e forma, para um único efeito.</p>
+                        
+                        <div class="signature-line">
+                            <div class="signature-box">
+                                <div class="signature-line-style"></div>
+                                <p><strong>CONTRATANTE</strong></p>
+                                <p>${contractorName}</p>
+                                <p>${contractorDoc}</p>
+                            </div>
+                            
+                            <div class="signature-box">
+                                <div class="signature-line-style"></div>
+                                <p><strong>CONTRATADO</strong></p>
+                                <p>${contractedName}</p>
+                                <p>${contractedDoc}</p>
+                            </div>
+                        </div>
+                        
+                        <div style="text-align: center; margin-top: 30px;">
+                            <p>${contractCity}, ${new Date().toLocaleDateString('pt-BR', { day: '2-digit', month: 'long', year: 'numeric' })}</p>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            return contractHTML;
+        }
+
+        // Update contract preview
+        function updatePreview() {
+            const contractPreview = document.getElementById('contractPreview');
+            contractPreview.innerHTML = generateProfessionalContract();
+        }
+        
+        // FAQ toggle function
+        function toggleFaq(element) {
+            const faqItem = element.parentElement;
+            faqItem.classList.toggle('active');
+        }
+        
+        // Payment modal functions
+        function openPaymentModal(plan) {
+            selectedPlan = plan;
+            
+            // Verificar se todos os campos obrigatórios estão preenchidos
+            const requiredFields = [
+                'contractorName', 'contractorDoc', 'contractedName', 'contractedDoc', 
+                'serviceDescription', 'serviceValue', 'startDate', 'contractCity'
+            ];
+            
+            let isValid = true;
+            requiredFields.forEach(fieldId => {
+                const field = document.getElementById(fieldId);
+                if (!field.value.trim()) {
+                    isValid = false;
+                    field.style.borderColor = 'var(--danger)';
+                } else {
+                    field.style.borderColor = '#e0e0e0';
+                }
+            });
+            
+            if (!isValid) {
+                alert('Por favor, preencha todos os campos obrigatórios antes de prosseguir com o pagamento.');
+                return;
+            }
+            
+            // Configurar modal baseado no plano selecionado
+            const modalTitle = document.getElementById('modalTitle');
+            const modalDescription = document.getElementById('modalDescription');
+            const modalPlanDescription = document.getElementById('modalPlanDescription');
+            const modalPrice = document.getElementById('modalPrice');
+            
+            switch(plan) {
+                case 'avulsa':
+                    modalTitle.textContent = 'Comprar Contrato Avulso';
+                    modalDescription.textContent = 'Resumo do Pedido';
+                    modalPlanDescription.textContent = '1 Contrato de Prestação de Serviços Personalizado';
+                    modalPrice.textContent = 'Total: R$ 9,90';
+                    break;
+                case 'basico':
+                    modalTitle.textContent = 'Assinar Plano Básico';
+                    modalDescription.textContent = 'Resumo da Assinatura';
+                    modalPlanDescription.textContent = 'Plano Básico - 3 contratos por mês';
+                    modalPrice.textContent = 'Total: R$ 14,90/mês';
+                    break;
+                case 'intermediario':
+                    modalTitle.textContent = 'Assinar Plano Intermediário';
+                    modalDescription.textContent = 'Resumo da Assinatura';
+                    modalPlanDescription.textContent = 'Plano Intermediário - 10-20 contratos por mês';
+                    modalPrice.textContent = 'Total: R$ 29,90/mês';
+                    break;
+                case 'ilimitado':
+                    modalTitle.textContent = 'Assinar Plano Ilimitado';
+                    modalDescription.textContent = 'Resumo da Assinatura';
+                    modalPlanDescription.textContent = 'Plano Ilimitado - Contratos ilimitados';
+                    modalPrice.textContent = 'Total: R$ 49,90/mês';
+                    break;
+            }
+            
+            document.getElementById('paymentModal').classList.add('active');
+        }
+        
+        function closePaymentModal() {
+            document.getElementById('paymentModal').classList.remove('active');
+        }
+        
+        function selectPayment(element) {
+            // Remove selected class from all options
+            document.querySelectorAll('.payment-option').forEach(option => {
+                option.classList.remove('selected');
+            });
+            
+            // Add selected class to clicked option
+            element.classList.add('selected');
+        }
+        
+        function processPayment() {
+            // Verificar se uma forma de pagamento foi selecionada
+            const selectedPayment = document.querySelector('.payment-option.selected');
+            if (!selectedPayment) {
+                alert('Por favor, selecione uma forma de pagamento.');
+                return;
+            }
+            
+            let message = '';
+            switch(selectedPlan) {
+                case 'avulsa':
+                    message = '🎉 Parabéns! Contrato avulso adquirido com sucesso.\n\nEm um sistema real, você seria redirecionado para o gateway de pagamento.';
+                    break;
+                case 'basico':
+                    message = '🎉 Parabéns! Plano Básico assinado com sucesso.\n\nVocê agora tem direito a 3 contratos por mês.';
+                    break;
+                case 'intermediario':
+                    message = '🎉 Parabéns! Plano Intermediário assinado com sucesso.\n\nVocê agora tem direito a 10-20 contratos por mês.';
+                    break;
+                case 'ilimitado':
+                    message = '🎉 Parabéns! Plano Ilimitado assinado com sucesso.\n\nVocê agora tem direito a contratos ilimitados.';
+                    break;
+            }
+            
+            alert(message);
+            closePaymentModal();
+            
+            // Simular download do contrato
+            setTimeout(() => {
+                alert('📄 Seu contrato está pronto para download!');
+            }, 1000);
+        }
+        
+        // Initialize the preview with current date
+        document.addEventListener('DOMContentLoaded', function() {
+            updatePreview();
+            
+            // Set minimum date for start date to today
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById('startDate').min = today;
+            
+            // Update end date min when start date changes
+            document.getElementById('startDate').addEventListener('change', function() {
+                document.getElementById('endDate').min = this.value;
+            });
+            
+            // Auto-update preview when form changes
+            const formInputs = document.querySelectorAll('#generator input, #generator select, #generator textarea');
+            formInputs.forEach(input => {
+                input.addEventListener('input', updatePreview);
+                input.addEventListener('change', updatePreview);
+            });
+        });
+    </script>     
+</body>
+</html>
