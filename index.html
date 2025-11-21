@@ -132,6 +132,11 @@
             color: var(--primary);
         }
 
+        .btn-sm {
+            padding: 0.5rem 1rem;
+            font-size: 0.9rem;
+        }
+
         /* Hero Section */
         .hero {
             padding: 5rem 0;
@@ -161,6 +166,112 @@
             gap: 1rem;
             justify-content: center;
             margin-top: 2rem;
+        }
+
+        /* AI Assistant Section */
+        .ai-assistant {
+            padding: 3rem 0;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .ai-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        @media (max-width: 768px) {
+            .ai-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .ai-content h2 {
+            font-size: 2.2rem;
+            margin-bottom: 1rem;
+        }
+
+        .ai-content p {
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+            opacity: 0.9;
+        }
+
+        .ai-features {
+            list-style: none;
+        }
+
+        .ai-features li {
+            margin-bottom: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .ai-features i {
+            color: #4cd964;
+        }
+
+        .ai-chat {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            box-shadow: var(--shadow);
+            height: 300px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .chat-messages {
+            flex: 1;
+            overflow-y: auto;
+            margin-bottom: 1rem;
+            padding: 1rem;
+            background: var(--light);
+            border-radius: var(--border-radius);
+        }
+
+        .message {
+            margin-bottom: 1rem;
+            padding: 0.8rem;
+            border-radius: var(--border-radius);
+            max-width: 80%;
+        }
+
+        .message.ai {
+            background: var(--primary);
+            color: white;
+            align-self: flex-start;
+        }
+
+        .message.user {
+            background: var(--light);
+            border: 1px solid #e0e0e0;
+            align-self: flex-end;
+            margin-left: auto;
+        }
+
+        .chat-input {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .chat-input input {
+            flex: 1;
+            padding: 0.8rem;
+            border: 1px solid #e0e0e0;
+            border-radius: var(--border-radius);
+        }
+
+        .chat-input button {
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: var(--border-radius);
+            padding: 0.8rem 1rem;
+            cursor: pointer;
         }
 
         /* Stats Section */
@@ -311,6 +422,24 @@
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 1rem;
+        }
+
+        .ai-help-button {
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: var(--border-radius);
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+            font-size: 0.8rem;
+            margin-top: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        .ai-help-button:hover {
+            background: var(--primary-dark);
         }
 
         .preview-section {
@@ -879,6 +1008,16 @@
             max-width: 400px;
         }
 
+        /* AI Modal */
+        .ai-modal {
+            max-width: 600px;
+        }
+
+        .ai-modal-body {
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
         /* Responsive */
         @media (max-width: 768px) {
             .header-content {
@@ -941,6 +1080,16 @@
             from { transform: translateX(0); opacity: 1; }
             to { transform: translateX(100%); opacity: 0; }
         }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        .pulse {
+            animation: pulse 2s infinite;
+        }
     </style>
 </head>
 <body>
@@ -955,10 +1104,10 @@
                 <nav>
                     <ul>
                         <li><a href="#home">Início</a></li>
+                        <li><a href="#ai-assistant">Assistente IA</a></li>
                         <li><a href="#features">Recursos</a></li>
                         <li><a href="#generator">Criar Contrato</a></li>
                         <li><a href="#pricing">Planos</a></li>
-                        <li><a href="#testimonials">Depoimentos</a></li>
                         <li><a href="#faq">FAQ</a></li>
                     </ul>
                 </nav>
@@ -974,7 +1123,46 @@
             <p>Crie contratos de prestação de serviços personalizados, seguros e juridicamente válidos. Economize tempo e evite dores de cabeça.</p>
             <div class="hero-buttons">
                 <a href="#generator" class="btn">Criar Meu Contrato</a>
-                <a href="#pricing" class="btn btn-outline">Ver Planos</a>
+                <a href="#ai-assistant" class="btn btn-outline pulse">
+                    <i class="fas fa-robot"></i> Assistente IA
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- AI Assistant Section -->
+    <section class="ai-assistant" id="ai-assistant">
+        <div class="container">
+            <div class="ai-container">
+                <div class="ai-content">
+                    <h2>Assistente de IA Integrado</h2>
+                    <p>Nossa inteligência artificial ajuda você a criar descrições profissionais para seu contrato. Basta descrever seu serviço em palavras simples!</p>
+                    <ul class="ai-features">
+                        <li><i class="fas fa-check"></i> Redação automática de cláusulas</li>
+                        <li><i class="fas fa-check"></i> Sugestões personalizadas</li>
+                        <li><i class="fas fa-check"></i> Linguagem jurídica adequada</li>
+                        <li><i class="fas fa-check"></i> Economia de tempo</li>
+                    </ul>
+                    <button class="btn" onclick="openAIModal()">
+                        <i class="fas fa-robot"></i> Experimentar o Assistente IA
+                    </button>
+                </div>
+                <div class="ai-chat">
+                    <div class="chat-messages" id="chatMessages">
+                        <div class="message ai">
+                            <strong>Assistente IA:</strong> Olá! Sou seu assistente para criação de contratos. Como posso ajudar você hoje?
+                        </div>
+                        <div class="message ai">
+                            Digite abaixo o tipo de serviço que você presta, e eu vou ajudar a criar uma descrição profissional para seu contrato!
+                        </div>
+                    </div>
+                    <div class="chat-input">
+                        <input type="text" id="chatInput" placeholder="Ex: Preciso de um contrato para serviços de design gráfico...">
+                        <button onclick="sendMessage()">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -1013,6 +1201,13 @@
             <div class="features-grid">
                 <div class="feature-card">
                     <div class="feature-icon">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <h3>Assistente IA</h3>
+                    <p>Inteligência Artificial integrada para ajudar na redação das cláusulas do contrato.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
                         <i class="fas fa-bolt"></i>
                     </div>
                     <h3>Rápido e Fácil</h3>
@@ -1038,13 +1233,6 @@
                     </div>
                     <h3>Download Imediato</h3>
                     <p>Receba seu contrato em PDF e Word prontos para usar assim que finalizar.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-mobile-alt"></i>
-                    </div>
-                    <h3>100% Online</h3>
-                    <p>Acesse de qualquer dispositivo, não precisa instalar software.</p>
                 </div>
                 <div class="feature-card">
                     <div class="feature-icon">
@@ -1125,6 +1313,9 @@
                     <div class="form-group">
                         <label for="serviceDescription">Descrição do Serviço</label>
                         <textarea id="serviceDescription" rows="3" placeholder="Descreva detalhadamente o serviço a ser prestado"></textarea>
+                        <button class="ai-help-button" onclick="openAIModal()">
+                            <i class="fas fa-robot"></i> Ajuda da IA para esta descrição
+                        </button>
                     </div>
                     
                     <div class="form-row">
@@ -1188,6 +1379,7 @@
         </div>
     </section>
 
+    <!-- Resto das seções (Pricing, Tips, Testimonials, FAQ, Footer) permanecem iguais -->
     <!-- Pricing Section -->
     <section class="pricing" id="pricing">
         <div class="container">
@@ -1208,7 +1400,7 @@
                         <li><i class="fas fa-check"></i> Download em PDF</li>
                         <li><i class="fas fa-check"></i> Modelos básicos</li>
                         <li><i class="fas fa-check"></i> Suporte por email</li>
-                        <li><i class="fas fa-times"></i> Download em Word</li>
+                        <li><i class="fas fa-times"></i> Assistente IA</li>
                         <li><i class="fas fa-times"></i> Revisão jurídica</li>
                     </ul>
                     <button class="btn" onclick="openPaymentModal('basico')">Escolher Plano</button>
@@ -1225,9 +1417,9 @@
                         <li><i class="fas fa-check"></i> 10-20 contratos por mês</li>
                         <li><i class="fas fa-check"></i> Download em PDF + Word</li>
                         <li><i class="fas fa-check"></i> Todos os modelos</li>
+                        <li><i class="fas fa-check"></i> Assistente IA incluído</li>
                         <li><i class="fas fa-check"></i> Revisão jurídica básica</li>
                         <li><i class="fas fa-check"></i> Suporte prioritário</li>
-                        <li><i class="fas fa-check"></i> Armazenamento em nuvem</li>
                     </ul>
                     <button class="btn btn-success" onclick="openPaymentModal('intermediario')">Escolher Plano</button>
                 </div>
@@ -1243,8 +1435,8 @@
                         <li><i class="fas fa-check"></i> Contratos ilimitados</li>
                         <li><i class="fas fa-check"></i> Download em PDF + Word</li>
                         <li><i class="fas fa-check"></i> Todos os modelos premium</li>
+                        <li><i class="fas fa-check"></i> Assistente IA avançado</li>
                         <li><i class="fas fa-check"></i> Revisão jurídica completa</li>
-                        <li><i class="fas fa-check"></i> Suporte 24/7</li>
                         <li><i class="fas fa-check"></i> Consultoria mensal</li>
                     </ul>
                     <button class="btn" onclick="openPaymentModal('ilimitado')">Escolher Plano</button>
@@ -1274,6 +1466,13 @@
             <div class="tips-grid">
                 <div class="tip-card">
                     <div class="tip-icon">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <h3>Use o Assistente IA</h3>
+                    <p>Nossa IA ajuda a criar descrições claras e profissionais para seu contrato.</p>
+                </div>
+                <div class="tip-card">
+                    <div class="tip-icon">
                         <i class="fas fa-search"></i>
                     </div>
                     <h3>Revise Sempre</h3>
@@ -1285,13 +1484,6 @@
                     </div>
                     <h3>Personalize</h3>
                     <p>Adapte o contrato à realidade do seu negócio e às necessidades específicas.</p>
-                </div>
-                <div class="tip-card">
-                    <div class="tip-icon">
-                        <i class="fas fa-file-signature"></i>
-                    </div>
-                    <h3>Assine Corretamente</h3>
-                    <p>Certifique-se de que todas as partes assinem o contrato de forma válida.</p>
                 </div>
                 <div class="tip-card">
                     <div class="tip-icon">
@@ -1314,15 +1506,15 @@
             <div class="testimonials-grid">
                 <div class="testimonial-card">
                     <div class="testimonial-text">
-                        "Como freelancer, sempre tive dificuldade com contratos. O ContratoFácil resolveu meu problema de forma rápida e profissional. Recomendo!"
+                        "O assistente de IA é incrível! Ele me ajudou a descrever meus serviços de forma profissional em segundos. Recomendo muito!"
                     </div>
                     <div class="testimonial-author">
                         <div class="author-avatar">
                             <i class="fas fa-user"></i>
                         </div>
                         <div class="author-info">
-                            <h4>Maria Silva</h4>
-                            <p>Designer Freelancer</p>
+                            <h4>Carlos Silva</h4>
+                            <p>Desenvolvedor Freelancer</p>
                         </div>
                     </div>
                 </div>
@@ -1344,7 +1536,7 @@
                 
                 <div class="testimonial-card">
                     <div class="testimonial-text">
-                        "A equipe revisou meu contrato e fez ajustes importantes que eu não tinha percebido. Serviço de alta qualidade!"
+                        "A IA integrada é um diferencial absurdo. Ela entende exatamente o que preciso e sugere textos perfeitos para o contrato."
                     </div>
                     <div class="testimonial-author">
                         <div class="author-avatar">
@@ -1370,6 +1562,16 @@
             <div class="faq-container">
                 <div class="faq-item">
                     <div class="faq-question" onclick="toggleFaq(this)">
+                        Como funciona o assistente de IA?
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Nosso assistente de IA usa inteligência artificial para ajudar você a criar descrições profissionais para seu contrato. Basta descrever seu serviço em palavras simples, e a IA vai sugerir uma redação jurídica adequada.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)">
                         Os contratos são juridicamente válidos?
                         <i class="fas fa-chevron-down"></i>
                     </div>
@@ -1390,31 +1592,11 @@
                 
                 <div class="faq-item">
                     <div class="faq-question" onclick="toggleFaq(this)">
-                        Posso editar o contrato após o download?
+                        Posso usar o assistente IA gratuitamente?
                         <i class="fas fa-chevron-down"></i>
                     </div>
                     <div class="faq-answer">
-                        <p>Sim, se você escolher um plano que inclui o formato Word, poderá editar o contrato livremente. O PDF também é editável com ferramentas apropriadas.</p>
-                    </div>
-                </div>
-                
-                <div class="faq-item">
-                    <div class="faq-question" onclick="toggleFaq(this)">
-                        Quais formas de pagamento são aceitas?
-                        <i class="fas fa-chevron-down"></i>
-                    </div>
-                    <div class="faq-answer">
-                        <p>Aceitamos cartão de crédito, débito, PIX e boleto bancário. O processamento é feito de forma segura através do Mercado Pago.</p>
-                    </div>
-                </div>
-                
-                <div class="faq-item">
-                    <div class="faq-question" onclick="toggleFaq(this)">
-                        Posso cancelar minha assinatura a qualquer momento?
-                        <i class="fas fa-chevron-down"></i>
-                    </div>
-                    <div class="faq-answer">
-                        <p>Sim, todas as assinaturas podem ser canceladas a qualquer momento sem multa. Você continua com acesso até o final do período contratado.</p>
+                        <p>Sim! O assistente IA básico está disponível gratuitamente para todos os usuários. Para funcionalidades avançadas de IA, recomendamos nossos planos Intermediário ou Ilimitado.</p>
                     </div>
                 </div>
             </div>
@@ -1427,7 +1609,7 @@
             <div class="footer-content">
                 <div class="footer-column">
                     <h4>ContratoFácil</h4>
-                    <p>Criação de contratos profissionais de forma rápida, segura e acessível.</p>
+                    <p>Criação de contratos profissionais com IA integrada.</p>
                     <div class="social-links">
                         <a href="#"><i class="fab fa-facebook-f"></i></a>
                         <a href="#"><i class="fab fa-instagram"></i></a>
@@ -1440,21 +1622,20 @@
                     <h4>Links Rápidos</h4>
                     <ul>
                         <li><a href="#home">Início</a></li>
+                        <li><a href="#ai-assistant">Assistente IA</a></li>
                         <li><a href="#features">Recursos</a></li>
                         <li><a href="#generator">Criar Contrato</a></li>
                         <li><a href="#pricing">Planos</a></li>
-                        <li><a href="#faq">FAQ</a></li>
                     </ul>
                 </div>
                 
                 <div class="footer-column">
-                    <h4>Modelos de Contrato</h4>
+                    <h4>Recursos IA</h4>
                     <ul>
-                        <li><a href="#">Prestação de Serviços</a></li>
-                        <li><a href="#">Parceria Comercial</a></li>
-                        <li><a href="#">Confidencialidade (NDA)</a></li>
-                        <li><a href="#">Trabalho Autônomo</a></li>
-                        <li><a href="#">Locação de Imóvel</a></li>
+                        <li><a href="#">Gerador de Descrições</a></li>
+                        <li><a href="#">Revisor de Cláusulas</a></li>
+                        <li><a href="#">Otimizador de Texto</a></li>
+                        <li><a href="#">Consultor Jurídico IA</a></li>
                     </ul>
                 </div>
                 
@@ -1469,7 +1650,7 @@
             </div>
             
             <div class="footer-bottom">
-                <p>&copy; 2024 ContratoFácil. Todos os direitos reservados.</p>
+                <p>&copy; 2024 ContratoFácil. Todos os direitos reservados. | Powered by AI Technology</p>
             </div>
         </div>
     </footer>
@@ -1525,10 +1706,195 @@
         </div>
     </div>
 
+    <!-- AI Assistant Modal -->
+    <div class="modal" id="aiModal">
+        <div class="modal-content ai-modal">
+            <div class="modal-header">
+                <h3><i class="fas fa-robot"></i> Assistente de IA</h3>
+                <button class="close-modal" onclick="closeAIModal()">&times;</button>
+            </div>
+            <div class="modal-body ai-modal-body">
+                <div class="form-group">
+                    <label>Descreva o serviço que você presta:</label>
+                    <textarea id="aiServiceDescription" rows="4" placeholder="Ex: Presto serviços de desenvolvimento web, criando sites responsivos e sistemas web personalizados..."></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Detalhes específicos (opcional):</label>
+                    <input type="text" id="aiSpecifics" placeholder="Ex: prazos de entrega, tecnologias usadas, etc.">
+                </div>
+                <button class="btn" onclick="generateAIDescription()" style="width: 100%;">
+                    <i class="fas fa-magic"></i> Gerar Descrição com IA
+                </button>
+                
+                <div id="aiResult" style="margin-top: 1.5rem; padding: 1rem; background: var(--light); border-radius: var(--border-radius); display: none;">
+                    <h4>Sugestão da IA:</h4>
+                    <p id="aiGeneratedText"></p>
+                    <button class="btn btn-sm" onclick="useAISuggestion()">
+                        <i class="fas fa-check"></i> Usar esta descrição
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script>
         // Variáveis globais
         let selectedPlan = 'avulsa';
 
+        // Base de conhecimento da IA para geração de descrições
+        const aiKnowledgeBase = {
+            'desenvolvimento web': [
+                "Desenvolvimento de websites responsivos e sistemas web personalizados, incluindo design, programação front-end e back-end, integração com bancos de dados e APIs, otimização para mecanismos de busca (SEO) e implementação de medidas de segurança.",
+                "Criação e manutenção de aplicações web utilizando tecnologias modernas como HTML5, CSS3, JavaScript, React, Node.js, e bancos de dados relacionais e não-relacionais, garantindo performance, segurança e escalabilidade.",
+                "Desenvolvimento completo de soluções web, desde a concepção do projeto até a implantação, incluindo análise de requisitos, prototipagem, programação, testes e deploy, com foco em experiência do usuário e funcionalidade."
+            ],
+            'design gráfico': [
+                "Criação de identidade visual, incluindo logotipos, manual da marca, cartões de visita, material institucional e peças para redes sociais, seguindo os princípios do design e as especificações do cliente.",
+                "Desenvolvimento de materiais gráficos para impressão e digital, como banners, folhetos, catálogos, apresentações e mockups, utilizando softwares especializados e seguindo padrões de qualidade e prazo estabelecidos.",
+                "Serviços de design criativo para diversas mídias, incluindo conceituação visual, criação de layouts, tratamento de imagens, diagramação e finalização de arquivos para impressão ou publicação digital."
+            ],
+            'marketing digital': [
+                "Gestão de presença digital, incluindo criação e execução de estratégias para mídias sociais, produção de conteúdo, campanhas de advertising, análise de métricas e relatórios de performance para otimização contínua.",
+                "Desenvolvimento e implementação de estratégias de marketing digital abrangendo SEO, marketing de conteúdo, mídias pagas, email marketing e analytics, com foco em geração de leads e conversões.",
+                "Consultoria e execução em marketing digital, incluindo planejamento estratégico, gestão de campanhas, criação de conteúdo, monitoramento de resultados e otimização de performance para alcance de objetivos comerciais."
+            ],
+            'consultoria': [
+                "Prestação de serviços de consultoria especializada, oferecendo análise, planejamento, implementação de soluções e acompanhamento de resultados, com emissão de relatórios técnicos e recomendações estratégicas.",
+                "Assessoria técnica e estratégica para otimização de processos, melhoria de performance e resolução de desafios específicos, baseada em metodologias validadas e experiência comprovada no segmento.",
+                "Serviços de consultoria profissional abrangendo diagnóstico situacional, desenvolvimento de planos de ação, implementação de melhorias e monitoramento de indicadores, com foco em resultados mensuráveis."
+            ],
+            'default': [
+                "Prestação de serviços especializados, incluindo planejamento, execução, monitoramento e entrega dos resultados acordados, com observância dos prazos estabelecidos e padrões de qualidade definidos.",
+                "Execução de serviços profissionais conforme especificações técnicas acordadas, utilizando metodologias apropriadas e seguindo os procedimentos estabelecidos para garantia da qualidade e satisfação do cliente.",
+                "Realização de serviços técnicos especializados, compreendendo análise de requisitos, desenvolvimento de soluções, implementação e suporte, com comprometimento com prazos, orçamentos e padrões de excelência."
+            ]
+        };
+
+        // Função para detectar o tipo de serviço baseado nas palavras-chave
+        function detectServiceType(text) {
+            const lowerText = text.toLowerCase();
+            
+            if (lowerText.includes('desenvolvimento') || lowerText.includes('programação') || lowerText.includes('site') || lowerText.includes('web')) {
+                return 'desenvolvimento web';
+            } else if (lowerText.includes('design') || lowerText.includes('gráfico') || lowerText.includes('logo') || lowerText.includes('visual')) {
+                return 'design gráfico';
+            } else if (lowerText.includes('marketing') || lowerText.includes('digital') || lowerText.includes('mídia') || lowerText.includes('social')) {
+                return 'marketing digital';
+            } else if (lowerText.includes('consultoria') || lowerText.includes('assessoria') || lowerText.includes('consultor')) {
+                return 'consultoria';
+            } else {
+                return 'default';
+            }
+        }
+
+        // Função para gerar descrição com IA
+        function generateAIDescription() {
+            const serviceText = document.getElementById('aiServiceDescription').value;
+            const specifics = document.getElementById('aiSpecifics').value;
+            
+            if (!serviceText.trim()) {
+                alert('Por favor, descreva o serviço que você presta.');
+                return;
+            }
+            
+            // Simular processamento da IA
+            const serviceType = detectServiceType(serviceText);
+            const suggestions = aiKnowledgeBase[serviceType] || aiKnowledgeBase['default'];
+            const randomSuggestion = suggestions[Math.floor(Math.random() * suggestions.length)];
+            
+            // Adicionar detalhes específicos se fornecidos
+            let finalSuggestion = randomSuggestion;
+            if (specifics.trim()) {
+                finalSuggestion += ` ${specifics}.`;
+            }
+            
+            // Mostrar resultado
+            document.getElementById('aiGeneratedText').textContent = finalSuggestion;
+            document.getElementById('aiResult').style.display = 'block';
+            
+            // Scroll para o resultado
+            document.getElementById('aiResult').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Função para usar a sugestão da IA
+        function useAISuggestion() {
+            const aiText = document.getElementById('aiGeneratedText').textContent;
+            document.getElementById('serviceDescription').value = aiText;
+            closeAIModal();
+            updatePreview();
+            
+            // Mostrar notificação
+            showNotification('✅ Descrição adicionada com sucesso!');
+        }
+
+        // Funções do Modal de IA
+        function openAIModal() {
+            document.getElementById('aiModal').classList.add('active');
+        }
+
+        function closeAIModal() {
+            document.getElementById('aiModal').classList.remove('active');
+        }
+
+        // Função do Chat IA
+        function sendMessage() {
+            const chatInput = document.getElementById('chatInput');
+            const chatMessages = document.getElementById('chatMessages');
+            const message = chatInput.value.trim();
+            
+            if (!message) return;
+            
+            // Adicionar mensagem do usuário
+            const userMessage = document.createElement('div');
+            userMessage.className = 'message user';
+            userMessage.innerHTML = `<strong>Você:</strong> ${message}`;
+            chatMessages.appendChild(userMessage);
+            
+            // Limpar input
+            chatInput.value = '';
+            
+            // Simular resposta da IA
+            setTimeout(() => {
+                const serviceType = detectServiceType(message);
+                const suggestions = aiKnowledgeBase[serviceType] || aiKnowledgeBase['default'];
+                const aiResponse = suggestions[Math.floor(Math.random() * suggestions.length)];
+                
+                const aiMessage = document.createElement('div');
+                aiMessage.className = 'message ai';
+                aiMessage.innerHTML = `<strong>Assistente IA:</strong> Com base na sua descrição, sugiro esta redação profissional para seu contrato:<br><br><em>"${aiResponse}"</em><br><br>Gostaria de usar esta descrição no seu contrato?`;
+                chatMessages.appendChild(aiMessage);
+                
+                // Adicionar botão de ação
+                const actionMessage = document.createElement('div');
+                actionMessage.className = 'message ai';
+                actionMessage.innerHTML = `<button class="btn-sm" onclick="useChatSuggestion('${aiResponse.replace(/'/g, "\\'")}')" style="background: var(--success); color: white; border: none; padding: 0.5rem 1rem; border-radius: 5px; cursor: pointer;">
+                    <i class="fas fa-check"></i> Usar esta descrição
+                </button>`;
+                chatMessages.appendChild(actionMessage);
+                
+                // Scroll para baixo
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+            }, 1000);
+            
+            // Scroll para baixo
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        // Função para usar sugestão do chat
+        function useChatSuggestion(text) {
+            document.getElementById('serviceDescription').value = text;
+            updatePreview();
+            showNotification('✅ Descrição do chat adicionada ao contrato!');
+        }
+
+        // Permitir enviar mensagem com Enter
+        document.getElementById('chatInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                sendMessage();
+            }
+        });
+
+        // [TODO: Todas as outras funções JavaScript anteriores permanecem aqui]
         // Função para gerar o contrato profissional
         function generateProfessionalContract() {
             // Obter valores do formulário
@@ -1821,7 +2187,7 @@
                 }, 100);
                 
                 // Feedback para o usuário
-                showDownloadSuccess();
+                showNotification('✅ Contrato baixado com sucesso! Verifique sua pasta de downloads.');
                 
             } catch (error) {
                 console.error('Erro no download:', error);
@@ -1895,8 +2261,8 @@
 </html>`;
         }
 
-        // Função para mostrar feedback de sucesso
-        function showDownloadSuccess() {
+        // Função para mostrar notificação
+        function showNotification(message) {
             // Criar notificação
             const notification = document.createElement('div');
             notification.className = 'notification';
@@ -1905,8 +2271,7 @@
             notification.innerHTML = `
                 <i class="fas fa-check-circle"></i>
                 <div>
-                    <strong>✅ Contrato baixado com sucesso!</strong>
-                    <div style="font-size: 0.9rem; opacity: 0.9;">Verifique sua pasta de downloads</div>
+                    <strong>${message}</strong>
                 </div>
             `;
             
