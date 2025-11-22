@@ -168,10 +168,106 @@
             margin-top: 2rem;
         }
 
-        /* Idea Assistant Section */
-        .idea-assistant {
-            padding: 4rem 0;
+        /* Floating Lamp Assistant */
+        .floating-assistant {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #ffd700, #ffa500);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            cursor: pointer;
+            box-shadow: 0 8px 25px rgba(255, 165, 0, 0.4);
+            z-index: 1001;
+            transition: var(--transition);
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .floating-assistant:hover {
+            transform: scale(1.1);
+            box-shadow: 0 12px 35px rgba(255, 165, 0, 0.6);
+        }
+
+        .suggestions-bubble {
+            position: absolute;
+            bottom: 80px;
+            right: 0;
+            width: 300px;
             background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            padding: 1.5rem;
+            z-index: 1002;
+            display: none;
+            animation: slideUp 0.3s ease;
+        }
+
+        .suggestions-bubble.active {
+            display: block;
+        }
+
+        .suggestions-bubble::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            right: 20px;
+            width: 0;
+            height: 0;
+            border-left: 10px solid transparent;
+            border-right: 10px solid transparent;
+            border-top: 10px solid white;
+        }
+
+        .suggestion-item {
+            background: var(--light);
+            padding: 1rem;
+            border-radius: var(--border-radius);
+            margin-bottom: 0.8rem;
+            cursor: pointer;
+            transition: var(--transition);
+            border-left: 3px solid var(--primary);
+            font-size: 0.9rem;
+        }
+
+        .suggestion-item:hover {
+            background: white;
+            transform: translateX(5px);
+            box-shadow: var(--shadow);
+        }
+
+        .suggestion-category {
+            font-weight: bold;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        @keyframes slideUp {
+            from { 
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to { 
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Features */
+        .features {
+            padding: 5rem 0;
+            background: var(--light);
         }
 
         .section-title {
@@ -190,89 +286,6 @@
             color: var(--gray);
             max-width: 700px;
             margin: 0 auto;
-        }
-
-        .idea-categories {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-bottom: 3rem;
-        }
-
-        .idea-category {
-            background: var(--light);
-            border-radius: var(--border-radius);
-            padding: 2rem;
-            text-align: center;
-            box-shadow: var(--shadow);
-            transition: var(--transition);
-            cursor: pointer;
-            border: 2px solid transparent;
-        }
-
-        .idea-category:hover {
-            transform: translateY(-5px);
-            border-color: var(--primary);
-        }
-
-        .idea-category.active {
-            border-color: var(--primary);
-            background: white;
-            box-shadow: 0 10px 30px rgba(44, 90, 160, 0.2);
-        }
-
-        .category-icon {
-            font-size: 3rem;
-            color: var(--primary);
-            margin-bottom: 1rem;
-        }
-
-        .idea-category h3 {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-            color: var(--primary);
-        }
-
-        .idea-suggestions {
-            background: white;
-            border-radius: var(--border-radius);
-            padding: 2rem;
-            box-shadow: var(--shadow);
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.5s ease;
-        }
-
-        .idea-suggestions.active {
-            max-height: 500px;
-            margin-top: 2rem;
-        }
-
-        .suggestion-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1rem;
-        }
-
-        .suggestion-item {
-            background: var(--light);
-            padding: 1.5rem;
-            border-radius: var(--border-radius);
-            border-left: 4px solid var(--primary);
-            cursor: pointer;
-            transition: var(--transition);
-        }
-
-        .suggestion-item:hover {
-            background: white;
-            transform: translateX(5px);
-            box-shadow: var(--shadow);
-        }
-
-        /* Features */
-        .features {
-            padding: 5rem 0;
-            background: var(--light);
         }
 
         .features-grid {
@@ -370,26 +383,6 @@
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 1rem;
-        }
-
-        .idea-help-button {
-            background: var(--primary);
-            color: white;
-            border: none;
-            border-radius: var(--border-radius);
-            padding: 0.5rem 1rem;
-            cursor: pointer;
-            font-size: 0.8rem;
-            margin-top: 0.5rem;
-            display: flex;
-            align-items: center;
-            gap: 0.3rem;
-            transition: var(--transition);
-        }
-
-        .idea-help-button:hover {
-            background: var(--primary-dark);
-            transform: translateY(-2px);
         }
 
         .preview-section {
@@ -568,10 +561,50 @@
             background: #5a6268;
         }
 
-        /* Pricing */
+        /* Pricing Section - Agora com accordion */
         .pricing {
             padding: 5rem 0;
             background: var(--light);
+        }
+
+        .pricing-accordion {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .pricing-accordion-item {
+            margin-bottom: 1rem;
+            border: 1px solid #e0e0e0;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            background: white;
+        }
+
+        .pricing-accordion-header {
+            padding: 1.5rem;
+            background: var(--light);
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: var(--transition);
+        }
+
+        .pricing-accordion-header:hover {
+            background: #e9ecef;
+        }
+
+        .pricing-accordion-content {
+            padding: 0 1.5rem;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+
+        .pricing-accordion-item.active .pricing-accordion-content {
+            padding: 1.5rem;
+            max-height: 1000px;
         }
 
         .pricing-grid {
@@ -752,18 +785,18 @@
             font-size: 0.9rem;
         }
 
-        /* FAQ */
+        /* FAQ Section - Agora com accordion */
         .faq {
             padding: 5rem 0;
             background: var(--light);
         }
 
-        .faq-container {
+        .faq-accordion {
             max-width: 800px;
             margin: 0 auto;
         }
 
-        .faq-item {
+        .faq-accordion-item {
             margin-bottom: 1rem;
             border: 1px solid #e0e0e0;
             border-radius: var(--border-radius);
@@ -771,7 +804,7 @@
             background: white;
         }
 
-        .faq-question {
+        .faq-accordion-header {
             padding: 1.5rem;
             background: var(--light);
             font-weight: 600;
@@ -782,18 +815,18 @@
             transition: var(--transition);
         }
 
-        .faq-question:hover {
+        .faq-accordion-header:hover {
             background: #e9ecef;
         }
 
-        .faq-answer {
+        .faq-accordion-content {
             padding: 0 1.5rem;
             max-height: 0;
             overflow: hidden;
             transition: max-height 0.3s ease;
         }
 
-        .faq-item.active .faq-answer {
+        .faq-accordion-item.active .faq-accordion-content {
             padding: 1.5rem;
             max-height: 500px;
         }
@@ -1027,26 +1060,6 @@
             to { transform: translateX(100%); opacity: 0; }
         }
 
-        @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
-            40% {transform: translateY(-10px);}
-            60% {transform: translateY(-5px);}
-        }
-
-        .bounce {
-            animation: bounce 2s infinite;
-        }
-
-        .pulse {
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
-        }
-
         /* Responsive */
         @media (max-width: 768px) {
             .header-content {
@@ -1098,8 +1111,17 @@
                 max-width: none;
             }
             
-            .idea-categories {
-                grid-template-columns: 1fr;
+            .floating-assistant {
+                bottom: 20px;
+                right: 20px;
+                width: 50px;
+                height: 50px;
+                font-size: 1.5rem;
+            }
+            
+            .suggestions-bubble {
+                width: 280px;
+                right: -50px;
             }
         }
     </style>
@@ -1116,11 +1138,10 @@
                 <nav>
                     <ul>
                         <li><a href="#home">Início</a></li>
-                        <li><a href="#idea-assistant">Sugestões</a></li>
                         <li><a href="#features">Recursos</a></li>
                         <li><a href="#generator">Criar Contrato</a></li>
-                        <li><a href="#pricing">Planos</a></li>
-                        <li><a href="#faq">FAQ</a></li>
+                        <li><a href="#pricing-accordion">Planos</a></li>
+                        <li><a href="#faq-accordion">FAQ</a></li>
                     </ul>
                 </nav>
                 <a href="#generator" class="btn btn-outline">Criar Contrato Agora</a>
@@ -1135,128 +1156,48 @@
             <p>Crie contratos de prestação de serviços personalizados, seguros e juridicamente válidos. Economize tempo e evite dores de cabeça.</p>
             <div class="hero-buttons">
                 <a href="#generator" class="btn">Criar Meu Contrato</a>
-                <a href="#idea-assistant" class="btn btn-outline pulse">
-                    <i class="fas fa-lightbulb"></i> Ver Sugestões
-                </a>
+                <a href="#features" class="btn btn-outline">Ver Recursos</a>
             </div>
         </div>
     </section>
 
-    <!-- Idea Assistant Section -->
-    <section class="idea-assistant" id="idea-assistant">
-        <div class="container">
-            <div class="section-title">
-                <h2>Inspiração para Seu Contrato</h2>
-                <p>Escolha uma categoria e veja sugestões profissionais para sua descrição de serviços</p>
-            </div>
-            
-            <div class="idea-categories">
-                <div class="idea-category" onclick="toggleCategory(this, 'tech')">
-                    <div class="category-icon">
-                        <i class="fas fa-laptop-code"></i>
-                    </div>
-                    <h3>Tecnologia & TI</h3>
-                    <p>Desenvolvimento, suporte, consultoria em TI</p>
-                </div>
-                
-                <div class="idea-category" onclick="toggleCategory(this, 'design')">
-                    <div class="category-icon">
-                        <i class="fas fa-palette"></i>
-                    </div>
-                    <h3>Design & Criativo</h3>
-                    <p>Design gráfico, UX/UI, criação de conteúdo</p>
-                </div>
-                
-                <div class="idea-category" onclick="toggleCategory(this, 'marketing')">
-                    <div class="category-icon">
-                        <i class="fas fa-chart-line"></i>
-                    </div>
-                    <h3>Marketing & Vendas</h3>
-                    <p>Marketing digital, consultoria, gestão</p>
-                </div>
-                
-                <div class="idea-category" onclick="toggleCategory(this, 'consultoria')">
-                    <div class="category-icon">
-                        <i class="fas fa-briefcase"></i>
-                    </div>
-                    <h3>Consultoria</h3>
-                    <p>Consultoria empresarial, estratégica, técnica</p>
-                </div>
-            </div>
-            
-            <div class="idea-suggestions" id="techSuggestions">
-                <h3 style="margin-bottom: 1.5rem; color: var(--primary);">Sugestões para Tecnologia & TI</h3>
-                <div class="suggestion-grid">
-                    <div class="suggestion-item" onclick="useSuggestion(this)">
-                        Desenvolvimento de sistemas web responsivos utilizando tecnologias modernas como React, Node.js e bancos de dados relacionais, incluindo análise de requisitos, prototipagem, programação, testes e implantação.
-                    </div>
-                    <div class="suggestion-item" onclick="useSuggestion(this)">
-                        Prestação de serviços de consultoria em TI para otimização de infraestrutura tecnológica, migração para nuvem, implementação de soluções de segurança e gestão de projetos de transformação digital.
-                    </div>
-                    <div class="suggestion-item" onclick="useSuggestion(this)">
-                        Desenvolvimento e manutenção de aplicações mobile para plataformas iOS e Android, utilizando frameworks cross-platform, com foco em performance, usabilidade e experiência do usuário.
-                    </div>
-                    <div class="suggestion-item" onclick="useSuggestion(this)">
-                        Suporte técnico especializado em infraestrutura de redes, administração de servidores, virtualização, backup e recuperação de dados, com monitoramento proativo e resolução de incidentes.
-                    </div>
-                </div>
-            </div>
-            
-            <div class="idea-suggestions" id="designSuggestions">
-                <h3 style="margin-bottom: 1.5rem; color: var(--primary);">Sugestões para Design & Criativo</h3>
-                <div class="suggestion-grid">
-                    <div class="suggestion-item" onclick="useSuggestion(this)">
-                        Criação de identidade visual completa incluindo logotipo, manual da marca, cartões de visita, material institucional e peças para redes sociais, seguindo os princípios do design e as especificações do cliente.
-                    </div>
-                    <div class="suggestion-item" onclick="useSuggestion(this)">
-                        Desenvolvimento de interface de usuário (UI) e experiência do usuário (UX) para aplicativos e websites, incluindo pesquisa de usuários, wireframes, protótipos e design system.
-                    </div>
-                    <div class="suggestion-item" onclick="useSuggestion(this)">
-                        Produção de conteúdo visual para redes sociais, incluindo criação de posts, stories, banners, motion graphics e gestão de identidade visual nas plataformas digitais.
-                    </div>
-                    <div class="suggestion-item" onclick="useSuggestion(this)">
-                        Design de materiais gráficos para impressão e digital, como catálogos, folhetos, apresentações corporativas, embalagens e materiais promocionais.
-                    </div>
-                </div>
-            </div>
-            
-            <div class="idea-suggestions" id="marketingSuggestions">
-                <h3 style="margin-bottom: 1.5rem; color: var(--primary);">Sugestões para Marketing & Vendas</h3>
-                <div class="suggestion-grid">
-                    <div class="suggestion-item" onclick="useSuggestion(this)">
-                        Gestão completa de mídias sociais incluindo estratégia de conteúdo, criação de posts, gestão de comunidade, campanhas patrocinadas e análise de métricas para otimização contínua.
-                    </div>
-                    <div class="suggestion-item" onclick="useSuggestion(this)">
-                        Desenvolvimento e implementação de estratégias de marketing digital abrangendo SEO, marketing de conteúdo, mídia paga, email marketing e analytics para geração de leads.
-                    </div>
-                    <div class="suggestion-item" onclick="useSuggestion(this)">
-                        Consultoria em marketing estratégico para posicionamento de marca, desenvolvimento de plano de marketing, pesquisa de mercado e definição de personas e jornada do cliente.
-                    </div>
-                    <div class="suggestion-item" onclick="useSuggestion(this)">
-                        Gestão de campanhas de performance marketing com foco em ROI, incluindo planejamento, execução, monitoramento e otimização em plataformas como Google Ads e Meta Ads.
-                    </div>
-                </div>
-            </div>
-            
-            <div class="idea-suggestions" id="consultoriaSuggestions">
-                <h3 style="margin-bottom: 1.5rem; color: var(--primary);">Sugestões para Consultoria</h3>
-                <div class="suggestion-grid">
-                    <div class="suggestion-item" onclick="useSuggestion(this)">
-                        Prestação de serviços de consultoria empresarial especializada em gestão estratégica, reestruturação organizacional, planejamento financeiro e implementação de melhorias de processos.
-                    </div>
-                    <div class="suggestion-item" onclick="useSuggestion(this)">
-                        Consultoria em gestão de projetos utilizando metodologias ágeis, incluindo capacitação de equipes, implementação de ferramentas e acompanhamento de indicadores de performance.
-                    </div>
-                    <div class="suggestion-item" onclick="useSuggestion(this)">
-                        Assessoria técnica especializada para otimização de operações, melhoria de eficiência, redução de custos e implementação de melhores práticas do setor.
-                    </div>
-                    <div class="suggestion-item" onclick="useSuggestion(this)">
-                        Consultoria em compliance e governança corporativa, incluindo mapeamento de riscos, desenvolvimento de políticas internas e implementação de programas de integridade.
-                    </div>
-                </div>
-            </div>
+    <!-- Floating Lamp Assistant -->
+    <div class="floating-assistant" onclick="toggleSuggestions()">
+        💡
+    </div>
+    <div class="suggestions-bubble" id="suggestionsBubble">
+        <div class="suggestion-category">💻 Desenvolvimento & TI</div>
+        <div class="suggestion-item" onclick="useSuggestion(this)">
+            Desenvolvimento de sistemas web responsivos utilizando tecnologias modernas como React, Node.js e bancos de dados relacionais.
         </div>
-    </section>
+        <div class="suggestion-item" onclick="useSuggestion(this)">
+            Prestação de serviços de consultoria em TI para otimização de infraestrutura tecnológica e migração para nuvem.
+        </div>
+        
+        <div class="suggestion-category">🎨 Design & Criativo</div>
+        <div class="suggestion-item" onclick="useSuggestion(this)">
+            Criação de identidade visual completa incluindo logotipo, manual da marca e material institucional.
+        </div>
+        <div class="suggestion-item" onclick="useSuggestion(this)">
+            Desenvolvimento de interface de usuário (UI) e experiência do usuário (UX) para aplicativos e websites.
+        </div>
+        
+        <div class="suggestion-category">📈 Marketing & Vendas</div>
+        <div class="suggestion-item" onclick="useSuggestion(this)">
+            Gestão completa de mídias sociais incluindo estratégia de conteúdo e campanhas patrocinadas.
+        </div>
+        <div class="suggestion-item" onclick="useSuggestion(this)">
+            Desenvolvimento e implementação de estratégias de marketing digital abrangendo SEO e marketing de conteúdo.
+        </div>
+        
+        <div class="suggestion-category">💼 Consultoria</div>
+        <div class="suggestion-item" onclick="useSuggestion(this)">
+            Prestação de serviços de consultoria empresarial especializada em gestão estratégica e planejamento financeiro.
+        </div>
+        <div class="suggestion-item" onclick="useSuggestion(this)">
+            Consultoria em gestão de projetos utilizando metodologias ágeis e implementação de ferramentas.
+        </div>
+    </div>
 
     <!-- Features Section -->
     <section class="features" id="features">
@@ -1271,7 +1212,7 @@
                         <i class="fas fa-lightbulb"></i>
                     </div>
                     <h3>Sugestões Inteligentes</h3>
-                    <p>Biblioteca com sugestões profissionais para diversas áreas de atuação.</p>
+                    <p>Assistente com lâmpada flutuante oferece sugestões profissionais para diversas áreas.</p>
                 </div>
                 <div class="feature-card">
                     <div class="feature-icon">
@@ -1380,9 +1321,6 @@
                     <div class="form-group">
                         <label for="serviceDescription">Descrição do Serviço</label>
                         <textarea id="serviceDescription" rows="3" placeholder="Descreva detalhadamente o serviço a ser prestado"></textarea>
-                        <button class="idea-help-button" onclick="scrollToIdeas()">
-                            <i class="fas fa-lightbulb"></i> Precisa de inspiração? Veja nossas sugestões
-                        </button>
                     </div>
                     
                     <div class="form-row">
@@ -1446,78 +1384,89 @@
         </div>
     </section>
 
-    <!-- Pricing Section -->
+    <!-- Pricing Section - Agora com Accordion -->
     <section class="pricing" id="pricing">
         <div class="container">
             <div class="section-title">
                 <h2>Planos e Preços</h2>
                 <p>Escolha o plano ideal para suas necessidades</p>
             </div>
-            <div class="pricing-grid">
-                <div class="pricing-card">
-                    <div class="pricing-header">
-                        <div class="pricing-name">Básico</div>
-                        <div class="pricing-price">R$ 14,90</div>
-                        <div class="pricing-period">por mês</div>
-                        <div class="pricing-description">3 contratos mensais</div>
+            
+            <div class="pricing-accordion" id="pricing-accordion">
+                <div class="pricing-accordion-item">
+                    <div class="pricing-accordion-header" onclick="toggleAccordion(this)">
+                        Ver Planos Disponíveis
+                        <i class="fas fa-chevron-down"></i>
                     </div>
-                    <ul class="pricing-features">
-                        <li><i class="fas fa-check"></i> 3 contratos por mês</li>
-                        <li><i class="fas fa-check"></i> Download em PDF</li>
-                        <li><i class="fas fa-check"></i> Modelos básicos</li>
-                        <li><i class="fas fa-check"></i> Suporte por email</li>
-                        <li><i class="fas fa-times"></i> Biblioteca de sugestões</li>
-                        <li><i class="fas fa-times"></i> Revisão jurídica</li>
-                    </ul>
-                    <button class="btn" onclick="openPaymentModal('basico')">Escolher Plano</button>
-                </div>
-                
-                <div class="pricing-card featured">
-                    <div class="pricing-header">
-                        <div class="pricing-name">Intermediário</div>
-                        <div class="pricing-price">R$ 29,90</div>
-                        <div class="pricing-period">por mês</div>
-                        <div class="pricing-description">10-20 contratos mensais</div>
-                    </div>
-                    <ul class="pricing-features">
-                        <li><i class="fas fa-check"></i> 10-20 contratos por mês</li>
-                        <li><i class="fas fa-check"></i> Download em PDF + Word</li>
-                        <li><i class="fas fa-check"></i> Todos os modelos</li>
-                        <li><i class="fas fa-check"></i> Biblioteca completa</li>
-                        <li><i class="fas fa-check"></i> Revisão jurídica básica</li>
-                        <li><i class="fas fa-check"></i> Suporte prioritário</li>
-                    </ul>
-                    <button class="btn btn-success" onclick="openPaymentModal('intermediario')">Escolher Plano</button>
-                </div>
-                
-                <div class="pricing-card">
-                    <div class="pricing-header">
-                        <div class="pricing-name">Ilimitado</div>
-                        <div class="pricing-price">R$ 49,90</div>
-                        <div class="pricing-period">por mês</div>
-                        <div class="pricing-description">Contratos ilimitados</div>
-                    </div>
-                    <ul class="pricing-features">
-                        <li><i class="fas fa-check"></i> Contratos ilimitados</li>
-                        <li><i class="fas fa-check"></i> Download em PDF + Word</li>
-                        <li><i class="fas fa-check"></i> Todos os modelos premium</li>
-                        <li><i class="fas fa-check"></i> Sugestões avançadas</li>
-                        <li><i class="fas fa-check"></i> Revisão jurídica completa</li>
-                        <li><i class="fas fa-check"></i> Consultoria mensal</li>
-                    </ul>
-                    <button class="btn" onclick="openPaymentModal('ilimitado')">Escolher Plano</button>
-                </div>
-            </div>
+                    <div class="pricing-accordion-content">
+                        <div class="pricing-grid">
+                            <div class="pricing-card">
+                                <div class="pricing-header">
+                                    <div class="pricing-name">Básico</div>
+                                    <div class="pricing-price">R$ 14,90</div>
+                                    <div class="pricing-period">por mês</div>
+                                    <div class="pricing-description">3 contratos mensais</div>
+                                </div>
+                                <ul class="pricing-features">
+                                    <li><i class="fas fa-check"></i> 3 contratos por mês</li>
+                                    <li><i class="fas fa-check"></i> Download em PDF</li>
+                                    <li><i class="fas fa-check"></i> Modelos básicos</li>
+                                    <li><i class="fas fa-check"></i> Suporte por email</li>
+                                    <li><i class="fas fa-times"></i> Assistente de sugestões</li>
+                                    <li><i class="fas fa-times"></i> Revisão jurídica</li>
+                                </ul>
+                                <button class="btn" onclick="openPaymentModal('basico')">Escolher Plano</button>
+                            </div>
+                            
+                            <div class="pricing-card featured">
+                                <div class="pricing-header">
+                                    <div class="pricing-name">Intermediário</div>
+                                    <div class="pricing-price">R$ 29,90</div>
+                                    <div class="pricing-period">por mês</div>
+                                    <div class="pricing-description">10-20 contratos mensais</div>
+                                </div>
+                                <ul class="pricing-features">
+                                    <li><i class="fas fa-check"></i> 10-20 contratos por mês</li>
+                                    <li><i class="fas fa-check"></i> Download em PDF + Word</li>
+                                    <li><i class="fas fa-check"></i> Todos os modelos</li>
+                                    <li><i class="fas fa-check"></i> Assistente de sugestões</li>
+                                    <li><i class="fas fa-check"></i> Revisão jurídica básica</li>
+                                    <li><i class="fas fa-check"></i> Suporte prioritário</li>
+                                </ul>
+                                <button class="btn btn-success" onclick="openPaymentModal('intermediario')">Escolher Plano</button>
+                            </div>
+                            
+                            <div class="pricing-card">
+                                <div class="pricing-header">
+                                    <div class="pricing-name">Ilimitado</div>
+                                    <div class="pricing-price">R$ 49,90</div>
+                                    <div class="pricing-period">por mês</div>
+                                    <div class="pricing-description">Contratos ilimitados</div>
+                                </div>
+                                <ul class="pricing-features">
+                                    <li><i class="fas fa-check"></i> Contratos ilimitados</li>
+                                    <li><i class="fas fa-check"></i> Download em PDF + Word</li>
+                                    <li><i class="fas fa-check"></i> Todos os modelos premium</li>
+                                    <li><i class="fas fa-check"></i> Sugestões avançadas</li>
+                                    <li><i class="fas fa-check"></i> Revisão jurídica completa</li>
+                                    <li><i class="fas fa-check"></i> Consultoria mensal</li>
+                                </ul>
+                                <button class="btn" onclick="openPaymentModal('ilimitado')">Escolher Plano</button>
+                            </div>
+                        </div>
 
-            <div class="pricing-avulsa">
-                <h3>Não precisa de assinatura?</h3>
-                <p style="margin-bottom: 1rem;">Compre contratos avulsos quando precisar</p>
-                <div style="font-size: 2rem; font-weight: bold; color: var(--primary); margin-bottom: 1rem;">
-                    R$ 9,90 por contrato
+                        <div class="pricing-avulsa">
+                            <h3>Não precisa de assinatura?</h3>
+                            <p style="margin-bottom: 1rem;">Compre contratos avulsos quando precisar</p>
+                            <div style="font-size: 2rem; font-weight: bold; color: var(--primary); margin-bottom: 1rem;">
+                                R$ 9,90 por contrato
+                            </div>
+                            <button class="btn btn-success" onclick="openPaymentModal('avulsa')">
+                                <i class="fas fa-shopping-cart"></i> Comprar Contrato Avulso
+                            </button>
+                        </div>
+                    </div>
                 </div>
-                <button class="btn btn-success" onclick="openPaymentModal('avulsa')">
-                    <i class="fas fa-shopping-cart"></i> Comprar Contrato Avulso
-                </button>
             </div>
         </div>
     </section>
@@ -1534,8 +1483,8 @@
                     <div class="tip-icon">
                         <i class="fas fa-lightbulb"></i>
                     </div>
-                    <h3>Use Nossas Sugestões</h3>
-                    <p>Inspire-se em nossa biblioteca de descrições profissionais para seu setor.</p>
+                    <h3>Use o Assistente</h3>
+                    <p>Clique na lâmpada flutuante para ver sugestões profissionais para sua área.</p>
                 </div>
                 <div class="tip-card">
                     <div class="tip-icon">
@@ -1572,7 +1521,7 @@
             <div class="testimonials-grid">
                 <div class="testimonial-card">
                     <div class="testimonial-text">
-                        "As sugestões de descrição são incríveis! Me ajudaram a criar um contrato profissional para meus serviços de desenvolvimento em segundos. Recomendo muito!"
+                        "O assistente com a lâmpada é genial! Com um clique tenho sugestões profissionais para meus contratos de desenvolvimento. Recomendo muito!"
                     </div>
                     <div class="testimonial-author">
                         <div class="author-avatar cs"></div>
@@ -1598,7 +1547,7 @@
                 
                 <div class="testimonial-card">
                     <div class="testimonial-text">
-                        "A biblioteca de sugestões é um diferencial absurdo. Encontrei exatamente o que precisava para descrever meus serviços de consultoria de forma profissional e completa."
+                        "As sugestões da lâmpada flutuante são perfeitas para quem não sabe por onde começar. Encontrei exatamente o que precisava para meus serviços de consultoria."
                     </div>
                     <div class="testimonial-author">
                         <div class="author-avatar jc"></div>
@@ -1612,51 +1561,60 @@
         </div>
     </section>
 
-    <!-- FAQ Section -->
+    <!-- FAQ Section - Agora com Accordion -->
     <section class="faq" id="faq">
         <div class="container">
             <div class="section-title">
                 <h2>Perguntas Frequentes</h2>
                 <p>Tire suas dúvidas sobre nossos serviços</p>
             </div>
-            <div class="faq-container">
-                <div class="faq-item">
-                    <div class="faq-question" onclick="toggleFaq(this)">
-                        Como funcionam as sugestões de descrição?
+            
+            <div class="faq-accordion" id="faq-accordion">
+                <div class="faq-accordion-item">
+                    <div class="faq-accordion-header" onclick="toggleAccordion(this)">
+                        Ver Perguntas Frequentes
                         <i class="fas fa-chevron-down"></i>
                     </div>
-                    <div class="faq-answer">
-                        <p>Nossa biblioteca contém descrições profissionais pré-formatadas para diversas áreas de atuação. Basta escolher uma categoria, selecionar a sugestão que mais se adequa ao seu serviço e ela será automaticamente inserida no seu contrato.</p>
-                    </div>
-                </div>
-                
-                <div class="faq-item">
-                    <div class="faq-question" onclick="toggleFaq(this)">
-                        Os contratos são juridicamente válidos?
-                        <i class="fas fa-chevron-down"></i>
-                    </div>
-                    <div class="faq-answer">
-                        <p>Sim, todos os nossos modelos são criados por especialistas jurídicos e estão em conformidade com a legislação brasileira. No entanto, para casos específicos ou de alto valor, recomendamos consultar um advogado.</p>
-                    </div>
-                </div>
-                
-                <div class="faq-item">
-                    <div class="faq-question" onclick="toggleFaq(this)">
-                        Como faço para baixar meu contrato?
-                        <i class="fas fa-chevron-down"></i>
-                    </div>
-                    <div class="faq-answer">
-                        <p>Após o pagamento, você receberá um link para download imediato do contrato nos formatos PDF e Word (dependendo do plano escolhido). O arquivo estará pronto para uso.</p>
-                    </div>
-                </div>
-                
-                <div class="faq-item">
-                    <div class="faq-question" onclick="toggleFaq(this)">
-                        Posso personalizar as sugestões?
-                        <i class="fas fa-chevron-down"></i>
-                    </div>
-                    <div class="faq-answer">
-                        <p>Sim! Todas as sugestões são editáveis. Você pode usá-las como inspiração e adaptar conforme as particularidades do seu serviço e acordo com o cliente.</p>
+                    <div class="faq-accordion-content">
+                        <div class="faq-accordion-item">
+                            <div class="faq-accordion-header" onclick="toggleAccordion(this)">
+                                Como funciona o assistente de lâmpada?
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                            <div class="faq-accordion-content">
+                                <p>Nosso assistente com lâmpada flutuante oferece sugestões profissionais pré-formatadas para diversas áreas de atuação. Basta clicar na lâmpada, escolher uma sugestão e ela será automaticamente inserida na descrição do seu contrato.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="faq-accordion-item">
+                            <div class="faq-accordion-header" onclick="toggleAccordion(this)">
+                                Os contratos são juridicamente válidos?
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                            <div class="faq-accordion-content">
+                                <p>Sim, todos os nossos modelos são criados por especialistas jurídicos e estão em conformidade com a legislação brasileira. No entanto, para casos específicos ou de alto valor, recomendamos consultar um advogado.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="faq-accordion-item">
+                            <div class="faq-accordion-header" onclick="toggleAccordion(this)">
+                                Como faço para baixar meu contrato?
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                            <div class="faq-accordion-content">
+                                <p>Após o pagamento, você receberá um link para download imediato do contrato nos formatos PDF e Word (dependendo do plano escolhido). O arquivo estará pronto para uso.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="faq-accordion-item">
+                            <div class="faq-accordion-header" onclick="toggleAccordion(this)">
+                                Posso personalizar as sugestões?
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                            <div class="faq-accordion-content">
+                                <p>Sim! Todas as sugestões são editáveis. Você pode usá-las como inspiração e adaptar conforme as particularidades do seu serviço e acordo com o cliente.</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -1682,17 +1640,17 @@
                     <h4>Links Rápidos</h4>
                     <ul>
                         <li><a href="#home">Início</a></li>
-                        <li><a href="#idea-assistant">Sugestões</a></li>
                         <li><a href="#features">Recursos</a></li>
                         <li><a href="#generator">Criar Contrato</a></li>
-                        <li><a href="#pricing">Planos</a></li>
+                        <li><a href="#pricing-accordion">Planos</a></li>
+                        <li><a href="#faq-accordion">FAQ</a></li>
                     </ul>
                 </div>
                 
                 <div class="footer-column">
                     <h4>Recursos</h4>
                     <ul>
-                        <li><a href="#">Biblioteca de Sugestões</a></li>
+                        <li><a href="#">Assistente de Sugestões</a></li>
                         <li><a href="#">Modelos de Contrato</a></li>
                         <li><a href="#">Dicas Profissionais</a></li>
                         <li><a href="#">Consultoria Jurídica</a></li>
@@ -1769,39 +1727,11 @@
     <script>
         // Variáveis globais
         let selectedPlan = 'avulsa';
-        let currentCategory = null;
 
-        // Funções do Sistema de Sugestões
-        function toggleCategory(element, category) {
-            const categories = document.querySelectorAll('.idea-category');
-            const suggestions = document.querySelectorAll('.idea-suggestions');
-            
-            // Remove active class de todas as categorias
-            categories.forEach(cat => cat.classList.remove('active'));
-            
-            // Esconde todas as sugestões
-            suggestions.forEach(sugg => sugg.classList.remove('active'));
-            
-            // Se clicar na mesma categoria, fecha
-            if (currentCategory === category) {
-                currentCategory = null;
-                return;
-            }
-            
-            // Ativa a categoria clicada
-            element.classList.add('active');
-            
-            // Mostra as sugestões correspondentes
-            const targetSuggestions = document.getElementById(category + 'Suggestions');
-            if (targetSuggestions) {
-                targetSuggestions.classList.add('active');
-                currentCategory = category;
-                
-                // Scroll suave para as sugestões
-                setTimeout(() => {
-                    targetSuggestions.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                }, 300);
-            }
+        // Funções do Assistente Flutuante
+        function toggleSuggestions() {
+            const bubble = document.getElementById('suggestionsBubble');
+            bubble.classList.toggle('active');
         }
 
         function useSuggestion(element) {
@@ -1810,17 +1740,38 @@
             updatePreview();
             showNotification('✅ Sugestão adicionada ao contrato!');
             
-            // Scroll de volta para o formulário
-            setTimeout(() => {
-                document.getElementById('generator').scrollIntoView({ behavior: 'smooth' });
-            }, 1000);
+            // Fecha o balão de sugestões
+            document.getElementById('suggestionsBubble').classList.remove('active');
         }
 
-        function scrollToIdeas() {
-            document.getElementById('idea-assistant').scrollIntoView({ behavior: 'smooth' });
+        // Fecha o balão ao clicar fora
+        document.addEventListener('click', function(event) {
+            const assistant = document.querySelector('.floating-assistant');
+            const bubble = document.getElementById('suggestionsBubble');
+            
+            if (!assistant.contains(event.target) && !bubble.contains(event.target)) {
+                bubble.classList.remove('active');
+            }
+        });
+
+        // Funções do Accordion
+        function toggleAccordion(element) {
+            const item = element.parentElement;
+            const isActive = item.classList.contains('active');
+            
+            // Fecha todos os accordions do mesmo nível
+            const siblings = item.parentElement.children;
+            for (let sibling of siblings) {
+                sibling.classList.remove('active');
+            }
+            
+            // Abre o clicado se não estava ativo
+            if (!isActive) {
+                item.classList.add('active');
+            }
         }
 
-        // Função para gerar o contrato profissional MELHORADO
+        // Função para gerar o contrato profissional
         function generateProfessionalContract() {
             // Obter valores do formulário
             const contractorName = document.getElementById('contractorName').value || '[NOME DO CONTRATANTE]';
@@ -1863,7 +1814,7 @@
             const contractNumber = Math.floor(1000 + Math.random() * 9000);
             const currentYear = new Date().getFullYear();
             
-            // Construir o contrato profissional MELHORADO
+            // Construir o contrato profissional
             const contractHTML = `
                 <div class="contract-header">
                     <div class="contract-title">CONTRATO DE PRESTAÇÃO DE SERVIÇOS</div>
@@ -1894,14 +1845,13 @@
                     <!-- CLÁUSULA 3ª - DO PRAZO -->
                     <div class="contract-clause">
                         <h4>CLÁUSULA TERCEIRA - DO PRAZO DE VIGÊNCIA</h4>
-                        <p>O presente contrato terá vigência a partir de <strong>${formatDate(startDate)}</strong> e será encerrado em <strong>${formatDate(endDate)}</strong>, podendo ser renovado ou prorrogado mediante acordo escrito entre as partes, celebrado com antecedência mínima de 30 (trinta) dias do término do prazo vigente.</p>
+                        <p>O presente contrato terá vigência a partir de <strong>${formatDate(startDate)}</strong> e será encerrado em <strong>${formatDate(endDate)}</strong>, podendo ser renovado ou prorrogado mediante acordo escrito entre as partes.</p>
                     </div>
 
                     <!-- CLÁUSULA 4ª - DO VALOR E FORMA DE PAGAMENTO -->
                     <div class="contract-clause">
                         <h4>CLÁUSULA QUARTA - DO VALOR E FORMA DE PAGAMENTO</h4>
-                        <p>Pelo fiel cumprimento do objeto deste contrato, o CONTRATANTE pagará ao CONTRATADO o valor total de <strong>R$ ${serviceValue}</strong> (${convertNumberToWords(serviceValue)} reais), que será pago na seguinte forma: <strong>${paymentMethodText}</strong>.</p>
-                        <p>Os pagamentos serão realizados contra apresentação de nota fiscal ou recibo de prestação de serviços, emitido pelo CONTRATADO, com vencimento conforme acordado entre as partes.</p>
+                        <p>Pelo fiel cumprimento do objeto deste contrato, o CONTRATANTE pagará ao CONTRATADO o valor total de <strong>R$ ${serviceValue}</strong>, que será pago na seguinte forma: <strong>${paymentMethodText}</strong>.</p>
                     </div>
 
                     <!-- CLÁUSULA 5ª - DAS OBRIGAÇÕES DO CONTRATADO -->
@@ -1909,12 +1859,12 @@
                         <h4>CLÁUSULA QUINTA - DAS OBRIGAÇÕES DO CONTRATADO</h4>
                         <p> São obrigações do CONTRATADO, além de outras estabelecidas neste instrumento:</p>
                         <ul>
-                            <li>Executar os serviços contratados com zelo, diligência e capacidade técnica adequada, observando as melhores práticas do mercado;</li>
-                            <li>Cumprir rigorosamente os prazos estabelecidos para a execução dos serviços e entrega dos resultados;</li>
-                            <li>Fornecer todos os materiais, equipamentos e recursos necessários para a execução dos serviços, salvo disposição em contrário;</li>
-                            <li>Comunicar imediatamente ao CONTRATANTE qualquer impedimento ou dificuldade que possa afetar o cumprimento dos prazos estabelecidos;</li>
-                            <li>Emitir nota fiscal ou recibo correspondente aos valores recebidos, observando a legislação tributária aplicável;</li>
-                            <li>Manter sigilo absoluto sobre todas as informações confidenciais a que tiver acesso em razão deste contrato.</li>
+                            <li>Executar os serviços contratados com zelo, diligência e capacidade técnica adequada;</li>
+                            <li>Cumprir rigorosamente os prazos estabelecidos para a execução dos serviços;</li>
+                            <li>Fornecer todos os materiais, equipamentos e recursos necessários para a execução dos serviços;</li>
+                            <li>Comunicar imediatamente ao CONTRATANTE qualquer impedimento ou dificuldade;</li>
+                            <li>Emitir nota fiscal ou recibo correspondente aos valores recebidos;</li>
+                            <li>Manter sigilo absoluto sobre todas as informações confidenciais.</li>
                         </ul>
                     </div>
 
@@ -1923,30 +1873,30 @@
                         <h4>CLÁUSULA SEXTA - DAS OBRIGAÇÕES DO CONTRATANTE</h4>
                         <p>São obrigações do CONTRATANTE, sem prejuízo de outras previstas neste contrato:</p>
                         <ul>
-                            <li>Fornecer todas as informações, documentos e recursos necessários para a perfeita execução dos serviços contratados;</li>
-                            <li>Efetuar os pagamentos nos prazos e condições estabelecidos neste instrumento;</li>
-                            <li>Fornecer feedback, aprovações e diretrizes dentro dos prazos estabelecidos para não comprometer a execução dos serviços;</li>
-                            <li>Comunicar eventuais inconformidades ou não conformidades no prazo máximo de 07 (sete) dias úteis após a entrega dos serviços;</li>
-                            <li>Indenizar o CONTRATADO por quaisquer prejuízos decorrentes de informações incorretas ou incompletas fornecidas.</li>
+                            <li>Fornecer todas as informações, documentos e recursos necessários para a execução dos serviços;</li>
+                            <li>Efetuar os pagamentos nos prazos e condições estabelecidos;</li>
+                            <li>Fornecer feedback e aprovações dentro dos prazos estabelecidos;</li>
+                            <li>Comunicar eventuais inconformidades no prazo máximo de 07 dias úteis;</li>
+                            <li>Indenizar o CONTRATADO por prejuízos decorrentes de informações incorretas.</li>
                         </ul>
                     </div>
 
                     <!-- CLÁUSULA 7ª - DA CONFIDENCIALIDADE -->
                     <div class="contract-clause">
                         <h4>CLÁUSULA SÉTIMA - DA CONFIDENCIALIDADE</h4>
-                        <p>As partes se obrigam a manter caráter confidencial sobre todas as informações, dados, documentos, métodos, processos e know-how a que tiverem acesso em razão deste contrato, obrigando-se a não divulgá-los ou utilizá-los para fins diversos dos previstos neste instrumento, inclusive após seu término, pelo prazo de <strong>${confidentialityPeriod} anos</strong>.</p>
+                        <p>As partes se obrigam a manter caráter confidencial sobre todas as informações a que tiverem acesso em razão deste contrato, obrigando-se a não divulgá-los, inclusive após seu término, pelo prazo de <strong>${confidentialityPeriod} anos</strong>.</p>
                     </div>
 
                     <!-- CLÁUSULA 8ª - DA PROPRIEDADE INTELECTUAL -->
                     <div class="contract-clause">
                         <h4>CLÁUSULA OITAVA - DA PROPRIEDADE INTELECTUAL</h4>
-                        <p>Todo e qualquer direito de propriedade intelectual, incluindo direitos autorais, patentes, marcas, desenhos industriais e know-how, relativo aos serviços prestados, materiais desenvolvidos e resultados alcançados será de propriedade exclusiva do CONTRATANTE, após o pagamento integral dos valores devidos.</p>
+                        <p>Todo e qualquer direito de propriedade intelectual relativo aos serviços prestados será de propriedade exclusiva do CONTRATANTE, após o pagamento integral dos valores devidos.</p>
                     </div>
 
                     <!-- CLÁUSULA 9ª - DAS GARANTIAS -->
                     <div class="contract-clause">
                         <h4>CLÁUSULA NONA - DAS GARANTIAS E RESPONSABILIDADES</h4>
-                        <p>O CONTRATADO garante a qualidade dos serviços prestados e se obriga a reparar, sem custo adicional, quaisquer vícios, defeitos ou não conformidades apontados pelo CONTRATANTE no prazo de 30 (trinta) dias a partir da entrega final dos serviços.</p>
+                        <p>O CONTRATADO garante a qualidade dos serviços prestados e se obriga a reparar, sem custo adicional, quaisquer vícios, defeitos ou não conformidades apontados pelo CONTRATANTE no prazo de 30 dias a partir da entrega.</p>
                     </div>
 
                     <!-- CLÁUSULA 10ª - DA RESCISÃO -->
@@ -1954,27 +1904,27 @@
                         <h4>CLÁUSULA DÉCIMA - DA RESCISÃO CONTRATUAL</h4>
                         <p>Este contrato poderá ser rescindido nas seguintes hipóteses:</p>
                         <ul>
-                            <li>Por mútuo acordo entre as partes, mediante termo aditivo;</li>
-                            <li>Por inadimplemento de qualquer das obrigações assumidas por qualquer das partes, após notificação escrita e prazo de 15 (quinze) dias para regularização;</li>
-                            <li>Por força maior ou caso fortuito que impeça definitivamente a execução do contrato;</li>
-                            <li>Por iniciativa de qualquer das partes, mediante aviso prévio de 30 (trinta) dias.</li>
+                            <li>Por mútuo acordo entre as partes;</li>
+                            <li>Por inadimplemento de qualquer das obrigações assumidas;</li>
+                            <li>Por força maior ou caso fortuito;</li>
+                            <li>Por iniciativa de qualquer das partes, mediante aviso prévio de 30 dias.</li>
                         </ul>
                     </div>
 
-                    <!-- CLÁUSULA 11ª - DAS MULTAS E INDENIZAÇÕES -->
+                    <!-- CLÁUSULA 11ª - DAS MULTAS -->
                     <div class="contract-clause">
                         <h4>CLÁUSULA DÉCIMA PRIMEIRA - DAS MULTAS E INDENIZAÇÕES</h4>
-                        <p>Em caso de descumprimento dos prazos estabelecidos para entrega dos serviços, o CONTRATADO pagará multa moratória de 2% (dois por cento) sobre o valor do serviço por dia de atraso, limitada a 20% (vinte por cento) do valor total do contrato.</p>
+                        <p>Em caso de descumprimento dos prazos estabelecidos, o CONTRATADO pagará multa moratória de 2% sobre o valor do serviço por dia de atraso, limitada a 20% do valor total do contrato.</p>
                     </div>
 
                     <!-- CLÁUSULA 12ª - DO FORO -->
                     <div class="contract-clause">
                         <h4>CLÁUSULA DÉCIMA SEGUNDA - DO FORO DE ELEIÇÃO</h4>
-                        <p>Para dirimir quaisquer controvérsias oriundas deste contrato, as partes elegem o foro da comarca de <strong>${contractCity}</strong>, com expressa renúncia a qualquer outro, por mais privilegiado que seja.</p>
+                        <p>Para dirimir quaisquer controvérsias oriundas deste contrato, as partes elegem o foro da comarca de <strong>${contractCity}</strong>, com expressa renúncia a qualquer outro.</p>
                     </div>
 
                     <div class="signature-area">
-                        <p>E por estarem assim justos e contratados, firmam o presente instrumento em duas vias de igual teor e forma, para um único efeito, na presença das testemunhas abaixo.</p>
+                        <p>E por estarem assim justos e contratados, firmam o presente instrumento em duas vias de igual teor e forma, para um único efeito.</p>
                         
                         <div class="signature-line">
                             <div class="signature-box">
@@ -1991,20 +1941,6 @@
                                 <p><strong>CONTRATADO</strong></p>
                             </div>
                         </div>
-
-                        <div class="signature-line">
-                            <div class="signature-box">
-                                <div class="signature-line-style"></div>
-                                <p>___________________________________</p>
-                                <p><strong>Testemunha</strong></p>
-                            </div>
-                            
-                            <div class="signature-box">
-                                <div class="signature-line-style"></div>
-                                <p>___________________________________</p>
-                                <p><strong>Testemunha</strong></p>
-                            </div>
-                        </div>
                         
                         <div class="contract-footer">
                             <p>${contractCity}, ${new Date().toLocaleDateString('pt-BR', { day: '2-digit', month: 'long', year: 'numeric' })}</p>
@@ -2016,32 +1952,10 @@
             return contractHTML;
         }
 
-        // Função auxiliar para converter números em palavras (simplificada)
-        function convertNumberToWords(number) {
-            // Esta é uma versão simplificada - em produção use uma biblioteca adequada
-            const numbers = {
-                '1': 'um', '2': 'dois', '3': 'três', '4': 'quatro', '5': 'cinco',
-                '6': 'seis', '7': 'sete', '8': 'oito', '9': 'nove', '10': 'dez'
-            };
-            
-            const num = parseFloat(number.replace(',', '.'));
-            if (num <= 10) {
-                return numbers[Math.floor(num).toString()] || num.toString();
-            }
-            
-            return num.toString();
-        }
-
         // Update contract preview
         function updatePreview() {
             const contractPreview = document.getElementById('contractPreview');
             contractPreview.innerHTML = generateProfessionalContract();
-        }
-        
-        // FAQ toggle function
-        function toggleFaq(element) {
-            const faqItem = element.parentElement;
-            faqItem.classList.toggle('active');
         }
         
         // Payment modal functions
